@@ -67,6 +67,7 @@ const AuthProvider = ({children}) => {
 
     const logout = () => {
         setAuth({})
+        localStorage.clear()
     }
 
     const submitUsuario = async usuario => {

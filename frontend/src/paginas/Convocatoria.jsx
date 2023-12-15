@@ -4,6 +4,7 @@ import useConvocatorias from "../hooks/useConvocatorias"
 import ModalFormularioPostulacion from "../components/ModalFormularioPostulacion"
 import useAuth from "../hooks/useAuth"
 import Postulado from "../components/Postulado"
+import PreviewPostulado from "../components/PreviewPostulado"
 
 const Convocatoria = () => {
     const { auth } = useAuth()
@@ -61,10 +62,11 @@ const Convocatoria = () => {
         <div className="bg-white shadow mt-10 rounded-lg">
           {convocatoria.postulados?.length ? 
         convocatoria.postulados?.map( postulado =>(
-          <Postulado
+          <PreviewPostulado
             key={postulado._id}
             postulado={postulado}
           />
+          
         )) : 
          <p className="text-center my-5 p-10">No hay Postulados en este momento</p> }
         </div>
