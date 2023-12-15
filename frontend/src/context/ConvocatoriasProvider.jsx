@@ -34,6 +34,7 @@ const ConvocatoriasProvider = ({children}) =>{
         obtenerConvocatorias()
     })
 
+    
     const  mostrarAlerta = alerta => {
         setAlerta(alerta)
         setTimeout(() =>{

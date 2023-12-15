@@ -8,7 +8,7 @@ const AuthProvider = ({children}) => {
     const [usuarios, setUsuarios] = useState([])
     const [alerta, setAlerta] = useState({})
     const [auth, setAuth] = useState({})
-    const [cargando, setCargando] = useState(false)
+    const [cargando, setCargando] = useState(true)
     const [usuario, setUsuario] = useState({})  
 
     const navigate = useNavigate()

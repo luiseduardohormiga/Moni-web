@@ -57,6 +57,8 @@ const Convocatoria = () => {
             </button>
             }
         </div>
+        {auth.rol === 'Aprendiz' ? 'hola' : 
+        <div>
         <h1 className="font-black text-3xl capitalize text-center mt-10">POSTULADOS A LA CONVOCATORIA</h1>
 
         <div className="bg-white shadow mt-10 rounded-lg">
@@ -68,13 +70,16 @@ const Convocatoria = () => {
           />
           
         )) : 
-         <p className="text-center my-5 p-10">No hay Postulados en este momento</p> }
+        <p className="text-center my-5 p-10">No hay Postulados en este momento</p> }
         </div>
-        
+
             <ModalFormularioPostulacion
               modal={modal}
               setModal={setModal}
             />
+      </div>
+        }
+        
     </>
   )
 }

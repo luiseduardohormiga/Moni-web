@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
@@ -18,6 +18,8 @@ const Registrar = () => {
   const [ password, setPassword ] = useState('')
   const [ repetirPassword, setRepetirPassword ] = useState('')
   const [ alerta, setAlerta ] = useState({})
+
+  const navigate = useNavigate()
 
   const params = useParams()
 
@@ -50,10 +52,16 @@ const Registrar = () => {
     try {
       const { data } = await clienteAxios.post(`/usuarios`,
       {nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, password, repetirPassword})
-      setAlerta({
-        msg: data.msg,
-        error: false
-      })
+        setAlerta({
+          msg: data.msg,
+          error: false
+        }) 
+        //redireccion
+        setTimeout(() => {
+          setAlerta({})
+          navigate('/login')
+        }, 2000);
+
       setNombre('')
       setApellido('')
       setTipo_documento('')
