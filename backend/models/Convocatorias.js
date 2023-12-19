@@ -11,6 +11,11 @@ const convocatoriasSchema = mongoose.Schema({
         trim: true,
         require: true,
     },
+    img:{
+        type: String,
+        trim: true,
+        require: true,
+    },
     fechaInicio:{
         type: Date,
         default: Date.now(),

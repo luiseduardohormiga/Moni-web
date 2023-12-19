@@ -7,6 +7,7 @@ const FormularioConvocatoria = () => {
     const [id, setId] = useState(null)
     const [titulo, setTitulo] = useState('')
     const [descripcion, setDescripcion] = useState('')
+    const [img, setImg] = useState('')
     const [fechaInicio, setFechaInicio] = useState('')
     const [fechaFinalizacion, setFechaFinalizacion] = useState('')
 
@@ -17,6 +18,7 @@ const FormularioConvocatoria = () => {
             setId(convocatoria._id)
             setTitulo(convocatoria.titulo)
             setDescripcion(convocatoria.descripcion)
+            setImg(convocatoria.img)
             setFechaInicio(convocatoria.fechaInicio?.split('T')[0])
             setFechaFinalizacion(convocatoria.fechaFinalizacion?.split('T')[0])
         }
@@ -25,7 +27,7 @@ const FormularioConvocatoria = () => {
 
     const handleSubmit = async e =>{
         e.preventDefault()
-        if ([titulo, descripcion, fechaInicio, fechaFinalizacion].includes('')) {
+        if ([titulo, descripcion, fechaInicio, fechaFinalizacion, img ].includes('')) {
             mostrarAlerta({
                 msg: 'Todos los campos son obligatorios',
                 error: true
@@ -34,10 +36,11 @@ const FormularioConvocatoria = () => {
         }
 
         //pasar al provider
-        await submitConvocatoria({ id, titulo, descripcion, fechaInicio, fechaFinalizacion})
+        await submitConvocatoria({ id, titulo, descripcion, fechaInicio, fechaFinalizacion, img})
         setId('')
         setTitulo('')
         setDescripcion('')
+        setImg('')
         setFechaInicio('')
         setFechaFinalizacion('')
     }
@@ -75,6 +78,16 @@ const FormularioConvocatoria = () => {
               value={descripcion}
               onChange={e => setDescripcion(e.target.value)}
           />
+      </div>
+      <div className="mb-5">
+      <label className="text-gray-700 uppercase font-bold text-sm" htmlFor="descripcion">Imagen de Portada</label>
+        <input 
+            type="text" 
+            id="img"
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={img}
+            onChange={e => setImg(e.target.value)}
+        />
       </div>
       <div className="mb-5">
           <label 

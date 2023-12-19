@@ -16,18 +16,14 @@ const Header = () => {
                 >Moni-Web
                 </Link>
             </h2>
-            <input 
-                type="search" 
-                placeholder="Buscar Convocatorias"
-                className="rounded-lg lg:w-96 block p-2 border"
-                />
-                <div className="flex items-center gap-4">
-                    <button
-                        type="button"
-                        onClick={logout}
-                        className="text-white text-sm bg-green-600 p-3 rounded-md uppercase font-bold"
-                    >Cerrar sesion</button>
-                </div>
+            <img src="C:\Users\Monic\Desktop\Moni-Web MERN\frontend\src\imglogo_sena.png" alt="imagen" />
+            <div className="flex items-center gap-4">
+                <button
+                    type="button"
+                    onClick={logout}
+                    className="text-white text-sm bg-green-600 p-3 rounded-md uppercase font-bold"
+                >Cerrar sesion</button>
+            </div>
         </div>
     </header>
     </>
