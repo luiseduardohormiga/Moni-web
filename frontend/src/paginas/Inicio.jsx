@@ -13,6 +13,7 @@ const Inicio = () => {
         <div className="w-300 m-16 p-16 b-2 br-8 bg-white">
           <h2>NOMBRE DE LA CONVOCATORIA</h2>
           <p>requisitos de postulacion</p>
+          <h1>este se puede eliminar</h1>
         </div>
     </>   
   )
