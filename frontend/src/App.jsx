@@ -30,6 +30,7 @@ function App() {
         <ConvocatoriasProvider>
           <Routes>
             <Route path='/' element={<Inicio />}>
+              <Route index element={<Convocatoiras/>} />
             </Route>
             <Route path='/' element={<AuthLayout />}>
               <Route path='login' element={<Login />} />

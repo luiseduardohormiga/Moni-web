@@ -3,7 +3,6 @@ import Postulacion from "../models/Postulaciones.js"
 
 const obtenerConvocatorias = async (req, res)=>{
     const convocatorias = await Convocatoria.find().select("-postulados")
-
     res.json(convocatorias)
 }
 
@@ -80,7 +79,6 @@ const eliminarConvocatoria = async (req, res)=>{
         console.log(error)
     }
 }
-
 
 export {
     obtenerConvocatorias,

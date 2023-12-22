@@ -18,15 +18,19 @@ const ConvocatoriasProvider = ({children}) =>{
         const obtenerConvocatorias = async (state) => {
             try {
                 const token = localStorage.getItem('token')
-            if(!token) return
-            const config ={
-                headers:{
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+            if(!token){
+                const { data } = await clienteAxios('/convocatorias')
+                setConvocatorias(data)
+            }else{
+                const config ={
+                    headers:{
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
                 }
+                const { data } = await clienteAxios('/convocatorias', config)
+                setConvocatorias(data)
             }
-            const { data } = await clienteAxios('/convocatorias', config)
-            setConvocatorias(data)
             } catch (error) {
                 console.log(error)
             }

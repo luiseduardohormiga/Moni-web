@@ -12,7 +12,7 @@ const router = express.Router()
 
 router
     .route('/')
-    .get(checkAuth, obtenerConvocatorias)
+    .get(obtenerConvocatorias)
     .post(checkAuth, nuevaConvocatoria)
 
 router
@@ -21,6 +21,9 @@ router
     .put(checkAuth, editarConvocatoria)
     .delete(checkAuth, eliminarConvocatoria)
 
+
+
+    //.get(checkAuth, obtenerConvocatorias)
 //router.get('/postulacion/:id', checkAuth, obtenerPostulaciones)
 
 export default router
