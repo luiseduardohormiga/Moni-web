@@ -52,7 +52,7 @@ const Login = () => {
                 <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
                 <input 
                     id="email"
-                    type="email" 
+                    type="email"
                     placeholder="Email de registo"
                     className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
                     value={email}
