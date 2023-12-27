@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 
 const Header = () => {
 
     const { logout } = useAuth();
+    const location = useLocation();
+    const ocultarBotonInicio = ['/convocatorias'];
+    const ocultarInicio = ocultarBotonInicio.includes(location.pathname);
 
   return (
     <>
@@ -16,8 +19,15 @@ const Header = () => {
                 >Moni-Web
                 </Link>
             </h2>
-            <img src="C:\Users\Monic\Desktop\Moni-Web MERN\frontend\src\imglogo_sena.png" alt="imagen" />
+            
             <div className="flex items-center gap-4">
+            {!ocultarInicio && (
+                <Link
+                to='/convocatorias'
+                className="text-white text-sm bg-green-600 p-3 rounded-md uppercase font-bold"
+                >Inicio
+                </Link>
+            )}
                 <button
                     type="button"
                     onClick={logout}

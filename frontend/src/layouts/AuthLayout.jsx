@@ -6,7 +6,7 @@ const AuthLayout = () => {
     <>
         <HeaderPrincipal/>
         <main className="container mx-auto p-5 md:flex md:justify-center">
-            <Outlet/>
+          <Outlet/>
         </main>
     </>
   )

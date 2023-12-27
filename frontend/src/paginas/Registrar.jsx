@@ -110,8 +110,8 @@ const Registrar = () => {
                 value={N_documento}
                 onChange={e => setN_documento(e.target.value)}
             />
-            </div>
-            <div className="my-5 p-2">
+          </div>
+          <div className="my-5 p-2">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
             <input 
                 id="email"
@@ -121,10 +121,9 @@ const Registrar = () => {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
             />
-        </div>
-          
-            
+          </div>
       </div>
+
         <div className="">
         <div className="p-2 ">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="apellido">Apellido</label>
@@ -200,12 +199,16 @@ const Registrar = () => {
         </div>
       </div> 
         </div>
-        <input 
-            type="submit"
-            value='Registrar'
-            className="bg-green-600 p-20 mb-5 py-3 text-white uppercase font-bold rounded
-                hover:cursor-pointer hover:bg-green-800 transition-color"
-        />
+        
+        <div className="text-center">
+          <input 
+              type="submit"
+              value='Registrar'
+              className="bg-green-600 p-20 mb-5 py-3 text-white uppercase font-bold rounded
+                  hover:cursor-pointer hover:bg-green-800 transition-color"
+          />
+        </div>
+        
         <nav className="lg:flex lg:justify-between">
         <Link
             className='block text-center my-5 text-slate-500 uppercase text-sm'

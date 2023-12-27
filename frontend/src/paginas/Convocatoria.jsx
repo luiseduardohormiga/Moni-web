@@ -17,7 +17,7 @@ const Convocatoria = () => {
         obtenerConvocatoria(params.id)
     }, [])
     const { titulo } = convocatoria
-    //console.log(convocatoria)
+    console.log(convocatoria)
     if (cargando) return 'cargando...'
   return (
     <>
@@ -36,15 +36,11 @@ const Convocatoria = () => {
                 </Link>
               </div>
             : auth.rol === 'instructor'? 
-            <div className='flex items-center text-black'>
-              <h1 className='font-black text-4xl'> Postulados a la convocatoria</h1>
-            </div>
+            ''
             : auth.rol === 'psicologo'? 
-            <div className='flex items-center text-black '>
-              <h1 className='font-black text-4xl'>Postulados a la convocatoria</h1>
-            </div>
+            ''
             : 
-              <button 
+            <button 
               onClick={handleModalPostulacion}
               type='button'
               className='text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase
@@ -60,17 +56,15 @@ const Convocatoria = () => {
         {auth.rol === 'Aprendiz' ? 'hola' : 
         <div>
         <h1 className="font-black text-3xl capitalize text-center mt-10">POSTULADOS A LA CONVOCATORIA</h1>
-
         <div className="bg-white shadow mt-10 rounded-lg">
           {convocatoria.postulados?.length ? 
-        convocatoria.postulados?.map( postulado =>(
+          convocatoria.postulados?.map( postulado =>(
           <PreviewPostulado
             key={postulado._id}
             postulado={postulado}
           />
-          
-        )) : 
-        <p className="text-center my-5 p-10">No hay Postulados en este momento</p> }
+          )) : 
+          <p className="text-center my-5 p-10">No hay Postulados en este momento</p> }
         </div>
 
             <ModalFormularioPostulacion

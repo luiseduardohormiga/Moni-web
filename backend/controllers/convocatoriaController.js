@@ -30,10 +30,7 @@ const obtenerConvocatoria = async (req, res)=>{
         const error = new Error("No encontrada")
         return res.status(404).json({msg: error.message})
     }
-    if (convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("Accion no valida")
-        return res.status(401).json({msg: error.message})
-    }
+    
     //obtener los postulados de la convocatoria
     const postulados = await Postulacion.find().where('convocatoria').equals(convocatoria._id)
     res.json( convocatoria )

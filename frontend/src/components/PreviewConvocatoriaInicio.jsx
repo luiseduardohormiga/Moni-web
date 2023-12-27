@@ -5,17 +5,21 @@ const PreviewConvocatoriaInicio = ({convocatoria}) => {
     const { titulo, _id, descripcion } = convocatoria
 
   return (
-        <div className="my-10 bg-white shadow rounded-lg p-10">
-            <img src="./img/logo_sena.pbg" alt="" />
-            <h1 className="uppercase font-black text-3xl text-center">{titulo}</h1>
-            <p className="text-center">
-                <span className="text-sm uppercase">{''}{descripcion}</span>
-            </p>
-            <Link
-                to={'/login'} 
-                className="text-green-500 hover:text-green-700 uppercase text-sm font-bold"
-                >Inicia Sesion para poder Postularce
-            </Link>
+        <div className="flex bg-gray-200 shadow rounded-lg p-10 gap-2 justify-center mt-10 mr-10">
+            <div>
+                <img src="/public/logo_sena.png" alt="logo sena" />
+            </div>
+            <div className="ml-20">
+                <h1 className="uppercase font-black text-3xl text-center">{titulo}</h1>
+                <p className="text-center">
+                    <span className="text-sm uppercase">{''}{descripcion}</span>
+                </p>
+                <Link
+                    to={'/login'} 
+                    className="text-green-700 hover:text-gray-600 uppercase font-bold"
+                    >Inicia Sesion para poder Postularce
+                </Link>
+            </div>
         </div>
   )
 }
