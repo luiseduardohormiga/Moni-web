@@ -10,32 +10,36 @@ const Header = () => {
 
   return (
     <>
-    <header className="px-4 py-5 bg-white border-b">
-        <div className="md:flex md:justify-between">
-            <h2 className="text-4xl text-green-600 font-black text-center">
-            <Link
-                to='/convocatorias'
-                className=" text-3xl text-green-600 uppercase font-bold"
-                >Moni-Web
-                </Link>
-            </h2>
-            
-            <div className="flex items-center gap-4">
-            {!ocultarInicio && (
-                <Link
-                to='/convocatorias'
-                className="text-white text-sm bg-green-600 p-3 rounded-md uppercase font-bold"
-                >Inicio
-                </Link>
-            )}
-                <button
-                    type="button"
-                    onClick={logout}
-                    className="text-white text-sm bg-green-600 p-3 rounded-md uppercase font-bold"
-                >Cerrar sesion</button>
-            </div>
+    <nav className="p-5 bg-white shadow md:flex md:items-center md:justify-between">
+        <div>
+            <span className="text-3xl text-green-600 uppercase font-bold">
+                Moni-Web
+            </span>
         </div>
-    </header>
+        <ul>
+            <li>
+                <a>
+                    {!ocultarInicio && (
+                    <Link
+                        to='/convocatorias'
+                        className="p-10 py-3 text-green-600 uppercase font-bold rounded
+                        hover:cursor-pointer hover:text-green-800 transition-color"
+                        >Inicio
+                    </Link>
+                )}
+                </a>
+                <a>
+                    <button
+                        type="button"
+                        onClick={logout}
+                        className="p-10 py-3 text-green-600 uppercase font-bold rounded
+                        hover:cursor-pointer hover:text-green-800 transition-color"
+                        >Cerrar sesion
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </nav>
     </>
   )
 }

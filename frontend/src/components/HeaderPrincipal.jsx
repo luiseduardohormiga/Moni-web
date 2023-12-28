@@ -25,8 +25,8 @@ const HeaderPrincipal = () => {
               <div className="mr-2">
                 <Link
                   to='/'
-                  className="bg-green-600 p-20 mb-5 w-full py-3 text-white uppercase font-bold rounded
-                  hover:cursor-pointer hover:bg-green-800 transition-color"
+                  className="p-10 w-full py-3 text-green-600 uppercase font-bold rounded
+                  hover:cursor-pointer hover:text-green-800 transition-color"
                 >Inicio
                 </Link>
               </div>
@@ -35,8 +35,8 @@ const HeaderPrincipal = () => {
                 <div className="mr-2">
                   <Link
                     to='login'
-                    className="bg-green-600 p-20 mb-5 w-full py-3 text-white uppercase font-bold rounded
-                    hover:cursor-pointer hover:bg-green-800 transition-color"
+                    className="p-10 w-full py-3 text-green-600 uppercase font-bold rounded
+                    hover:cursor-pointer hover:text-green-800 transition-color"
                     >Iniciar Sesion
                   </Link>
                 </div>
@@ -45,8 +45,8 @@ const HeaderPrincipal = () => {
                 <div>
                   <Link
                     to='registrar'
-                    className="bg-green-600 p-20 mb-5 w-full py-3 text-white uppercase font-bold rounded
-                    hover:cursor-pointer hover:bg-green-800 transition-color"
+                    className="p-10 w-full py-3 text-green-600 uppercase font-bold rounded
+                    hover:cursor-pointer hover:text-green-800 transition-color"
                     >Registrarse
                   </Link>
                 </div>
