@@ -99,6 +99,7 @@ const ModalFormularioPostulacion = () => {
                               className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
                               value={archivoPDF}
                               onChange={e => setArchivoPDF(e.target.value)}
+                              accept='pdf'
                             />
                           </div>
                           <input type="submit"

@@ -18,7 +18,6 @@ const Header = () => {
         </div>
         <ul>
             <li>
-                <a>
                     {!ocultarInicio && (
                     <Link
                         to='/convocatorias'
@@ -27,8 +26,6 @@ const Header = () => {
                         >Inicio
                     </Link>
                 )}
-                </a>
-                <a>
                     <button
                         type="button"
                         onClick={logout}
@@ -36,7 +33,6 @@ const Header = () => {
                         hover:cursor-pointer hover:text-green-800 transition-color"
                         >Cerrar sesion
                     </button>
-                </a>
             </li>
         </ul>
     </nav>

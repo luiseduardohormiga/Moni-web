@@ -7,6 +7,7 @@ import {
     eliminarConvocatoria,
 } from '../controllers/convocatoriaController.js'
 import checkAuth from '../middleware/checkAuth.js'
+//import uploadMiddelware from '../middleware/MulterMiddelware.js'
 
 const router = express.Router()
 

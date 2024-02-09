@@ -4,17 +4,17 @@ const convocatoriasSchema = mongoose.Schema({
     titulo:{
         type: String,
         trim: true,
-        require:true,
+        //require:true,
     },
     descripcion:{
         type: String,
         trim: true,
-        require: true,
+        //require: true,
     },
-    img:{
-        type: String,
-        trim: true,
-        require: true,
+    img: {
+        url: String,
+        public_id: String,
+        //require: true,
     },
     fechaInicio:{
         type: Date,

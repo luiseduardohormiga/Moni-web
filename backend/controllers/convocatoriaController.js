@@ -1,5 +1,7 @@
 import Convocatoria from "../models/Convocatorias.js"
 import Postulacion from "../models/Postulaciones.js"
+import { uploadImage, deleteImg } from "../libs/cloudinary.js"
+import fs from 'fs-extra'
 
 const obtenerConvocatorias = async (req, res)=>{
     const convocatorias = await Convocatoria.find().select("-postulados")
@@ -8,16 +10,32 @@ const obtenerConvocatorias = async (req, res)=>{
 
 const nuevaConvocatoria = async (req, res)=>{
     if (req.usuario.rol === "admin") {
-        const convocatoria = new Convocatoria(req.body)
+        let img;
+        if (req.files?.img) {
+            const result = await uploadImage(req.files.img.tempFilePath)
+            await fs.remove(req.files.img.tempFilePath)
+            img = {
+                url: result.secure_url,
+                public_id: result.public_id
+            }
+        }
+
+    const convocatoria = new Convocatoria({
+        ...req.body,
+        img,
+    })
+
         convocatoria.creador = req.usuario._id
-        try {
+        try { 
             const convocatoriaAlmacenada = await convocatoria.save()
             res.json(convocatoriaAlmacenada)
+            console.log(convocatoriaAlmacenada)
         } catch (error) {
             console.log(error)
         }
+
     } else {
-        const error = new Error("un aprendiz no pude hacer eso")
+        const error = new Error("no cuentas con el permiso")
         return res.status(401).json({msg: error.message})
     }
     
@@ -70,8 +88,12 @@ const eliminarConvocatoria = async (req, res)=>{
         return res.status(401).json({msg: error.message})
     }
     try {
+        if (convocatoria.img.public_id) {
+            await deleteImg(convocatoria.img.public_id)
+        }
         await convocatoria.deleteOne()
         res.json({msg: "convocatoria Eliminada"})
+        console.log(convocatoria)
     } catch (error) {
         console.log(error)
     }

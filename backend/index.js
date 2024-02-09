@@ -5,9 +5,14 @@ import cors from "cors"
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import convocatoriaRoutes from './routes/convocatoriaRoutes.js'
 import postulacionRoutes from './routes/postulacionRoutes.js'
+import fileUpload from "express-fileupload";
 
 const app = express();
 app.use(express.json())
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './upload'
+}))
 
 dotenv.config();
 conectarDB();
@@ -27,6 +32,9 @@ const corsOptions ={
     }
 }
 app.use(cors(corsOptions))
+
+//imagen
+//app.use(express.static("public"))
 
 //routing 
 app.use('/api/usuarios', usuarioRoutes)

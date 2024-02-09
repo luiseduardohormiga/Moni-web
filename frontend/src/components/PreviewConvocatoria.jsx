@@ -8,14 +8,12 @@ const PreviewConvocatoria = ({convocatoria}) => {
   return (
     <>
       <div className="border-b p-5 flex">
-          <p className="flex-1 mr-7">
+          <div className="flex-1 mr-7">
               <h1 className="uppercase">{titulo}</h1>
               <span className="text-sm text-gray-500 uppercase">{' '}
-              <p>
                 {descripcion}
-              </p>
               </span>
-          </p>
+          </div>
           <div>
             {auth.rol === 'admin'?
               <Link
