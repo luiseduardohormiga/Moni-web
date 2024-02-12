@@ -11,11 +11,16 @@ const PreviewUsuarios = ({usuario}) => {
 
               <span className="text-sm text-gray-500 uppercase">{' '}</span>
           </p>
-          
+          <div>
             <Link
-           to={`${_id}`}  
-            className="text-gray-500 hover:text-gray-800 uppercase text-sm font-bold"
-            >VER</Link>
+              to={`${_id}`}  
+              className="text-gray-500 hover:text-gray-800 uppercase text-sm font-bold flex"
+              >
+                ver
+              <img className="w-7 ml-5" src="/public/ver.png"/>
+            </Link>
+          </div>
+            
       </div>
     </>
   )

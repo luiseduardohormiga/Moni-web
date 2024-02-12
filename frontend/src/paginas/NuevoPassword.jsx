@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import clienteAxios from "../config/clienteAxios"
 import Alerta from "../components/Alerta"
 
@@ -10,6 +10,7 @@ const NuevoPassword = () => {
     const [alerta, setAlerta] = useState({})
     const [passwordModificado, setPasswordModificado] = useState(false)
 
+    const navigate = useNavigate()
     const params = useParams()
     const { token } = params
 
@@ -47,6 +48,11 @@ const NuevoPassword = () => {
                 error: false
             })
             setPasswordModificado(true)
+            //redireccionar
+            setTimeout(() => {
+                setAlerta({})
+                navigate('/login')
+            },2000)
         } catch (error) {
             setAlerta({
                 msg: error.response.data.msg,

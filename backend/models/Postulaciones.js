@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const postulacionesSchema = mongoose.Schema({
+    Postulado:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Usuario"
+    },
     archivoPDF:{
         type: String,
         require: true,

@@ -15,7 +15,8 @@ const Sidebar = () => {
       <>
         {auth.rol === 'admin' ? 
           <aside className="md:w-80 lg:w-96 px-5 py-10">
-          <p className="text-xl font-bold">Bienvenido {auth.nombre}</p>
+          <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
+          <p className="text-xl font-bold">Rol: {auth.rol}</p>
           {!ocultarUsuarios && (
              <Link
               to='/usuarios'
@@ -32,11 +33,26 @@ const Sidebar = () => {
           )}
         </aside>
           : auth.rol === 'Aprendiz' ? 
-          <p className="text-xl font-bold">Bienvenido Aprendiz {auth.nombre}</p>
+          <aside className="md:w-80 lg:w-96 px-5 py-10">
+            <div>
+              <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
+              <p className="text-xl font-bold">Rol: {auth.rol}</p>
+            </div>
+          </aside>
           : auth.rol === 'instuctor' ? 
-          <p className="text-xl font-bold">Bienvenido instructor {auth.nombre}</p>
+          <aside className="md:w-80 lg:w-96 px-5 py-10">
+            <div>
+              <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
+              <p className="text-xl font-bold">Rol: {auth.rol}</p>
+            </div>
+          </aside>
           :
-          <p className="text-xl font-bold">Bienvenido psicolo@ {auth.nombre}</p>
+          <aside className="md:w-80 lg:w-96 px-5 py-10">
+            <div>
+              <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
+              <p className="text-xl font-bold">Rol: {auth.rol}</p>
+            </div>
+          </aside>
         }
         
       </>

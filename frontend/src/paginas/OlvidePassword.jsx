@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
 
@@ -8,6 +8,7 @@ const OlvidePassword = () => {
     const [email, setEmail] = useState('')
     const [alerta, setAlerta] = useState({})
 
+    const navigate = useNavigate()
     const handleSubmit = async e => {
         e.preventDefault()
 
@@ -24,6 +25,11 @@ const OlvidePassword = () => {
                 msg: data.msg,
                 error: false
             })
+            //redireccionar
+            setTimeout(() => {
+                setAlerta({})
+                navigate('/')
+            },2000)
         } catch (error) {
             setAlerta({
                 msg: error.response.data.msg,

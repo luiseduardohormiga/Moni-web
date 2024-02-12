@@ -92,10 +92,7 @@ const ConvocatoriasProvider = ({children}) =>{
                 Authorization: `Bearer ${token}`
             }
         }
-        const form = new FormData()
-        for (let key in convocatoria) {
-            form.append(key, convocatoria(key))
-        }
+        
         const { data } = await clienteAxios.post('/convocatorias', convocatoria, config, {
             headers: {
                 "Content-Type": "Multipart/form-data"

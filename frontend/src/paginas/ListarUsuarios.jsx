@@ -7,12 +7,17 @@ const ListarUsuarios = () => {
     //console.log(usuarios)
   return (
     <>
-      <h1 className="text-4xl font.black">Usuarios</h1>
-      <Link
-          to='crear-usuario'
-          className="bg-green-600 w-full p-3 text-white uppercase font-bold block mt-5 text-cente rounded-lg"
-          >Nuevo usuario
-      </Link>
+    <div className="flex gap-9">
+      <h1 className="text-4xl p-3  font-black">Usuarios</h1>
+      <div>
+        <Link
+            to='crear-usuario'
+            className="bg-green-600 p-3 text-white uppercase font-bold mt-5 text-cente rounded-lg flex"
+            >Nuevo usuario
+            <img className="w-7 ml-5" src="/public/agregar-usuario.png"/>
+        </Link>
+      </div>
+    </div>
       
       <div className="bg-white shadow mt-10 rounded-lg ">
         {usuarios.length ?

@@ -3,16 +3,19 @@ import useAuth from "../hooks/useAuth"
 
 const PreviewConvocatoria = ({convocatoria}) => {
   const { auth } = useAuth()
-  const { titulo, _id, descripcion } = convocatoria
+  const { titulo, _id, descripcion, img } = convocatoria
 
   return (
     <>
       <div className="border-b p-5 flex">
-          <div className="flex-1 mr-7">
-              <h1 className="uppercase">{titulo}</h1>
-              <span className="text-sm text-gray-500 uppercase">{' '}
-                {descripcion}
-              </span>
+          <div className="flex mr-7">
+              {convocatoria.img && <img src={img.url} alt="imagen"/>}
+              <div className="ml-10 mr-20">
+                <h1 className="uppercase font-bold">{titulo}</h1>
+                <span className="text-sm text-gray-500 uppercase">{' '}
+                  {descripcion}
+                </span>
+              </div>
           </div>
           <div>
             {auth.rol === 'admin'?

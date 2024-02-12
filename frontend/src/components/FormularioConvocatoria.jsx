@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import useConvocatorias from "../hooks/useConvocatorias"
 import Alerta from "./Alerta"
 
+
 const FormularioConvocatoria = () => {
     const [id, setId] = useState(null)
     const [titulo, setTitulo] = useState('')
@@ -32,6 +33,10 @@ const FormularioConvocatoria = () => {
     
     const handleSubmit = async e =>{
         e.preventDefault()
+        if (titulo.trim() === '') {
+            alert('La convocatoria necesita un Titulo');
+            return;
+          }
         if ([titulo, descripcion, img, fechaInicio, fechaFinalizacion ].includes('')) {
             mostrarAlerta({
                 msg: 'Todos los campos son obligatorios',
@@ -84,14 +89,14 @@ const FormularioConvocatoria = () => {
             />
         </div>
         <div className="mb-5">
-            <label className="text-gray-700 uppercase font-bold text-sm" htmlFor="img">Imagen de Portada</label>
+            <label className="text-gray-700 uppercase font-bold text-sm" htmlFor="imagen">Imagen de Portada</label>
             <input 
+                id="imagen"
                 type="file"
-                id="img"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                onChange={handleFileChange} 
+                onChange={e => setImg(e.target.files[0])} 
                 accept="image/*"
-                
+                //value={img}
             />
         </div>
         <div className="mb-5">
@@ -104,7 +109,16 @@ const FormularioConvocatoria = () => {
                 type="date"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                 value={fechaInicio}
-                onChange={e => setFechaInicio(e.target.value)}
+                onChange={e => {
+                    const selectDate = new Date(e.target.value);
+                    const currenDate = new Date()
+                    if (selectDate < currenDate){
+                        alert('La fecha de inicio no puede ser menor que la fecha actual')
+                        setFechaInicio(currenDate.toISOString().slice(0, 10));
+                        return;
+                    }
+                    setFechaInicio(e.target.value)
+                }}
             />
         </div>
         <div className="mb-5">
@@ -117,7 +131,15 @@ const FormularioConvocatoria = () => {
                 type="date"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                 value={fechaFinalizacion}
-                onChange={e => setFechaFinalizacion(e.target.value)}
+                onChange={e => {
+                    const fechaFinalizacion = e.target.value;
+                    if (fechaFinalizacion <= fechaInicio) {
+                        alert('La fecha de finalizacion no puede ser menor o igual a la decha de inicio')
+                        setFechaFinalizacion('')
+                        return;
+                    }
+                    setFechaFinalizacion(e.target.value)
+                }}
             />
         </div>
       
