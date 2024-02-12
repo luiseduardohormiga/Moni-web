@@ -6,7 +6,7 @@ import Footer from "../components/Footer"
 const Inicio = () => {
 
   const { convocatorias } = useConvocatorias()
-  console.log(convocatorias) 
+  //console.log(convocatorias) 
 
   return (
     <>

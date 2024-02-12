@@ -88,7 +88,7 @@ const Registrar = () => {
      >
      <h1 className="text-green-600 font-black text-6xl capitalize text-center mb-10">Registrate</h1>
       {msg && <Alerta alerta={alerta}/>}
-      <div className="flex">
+      <div className="md:flex">
       <div className="justify-center">
           <div className="p-2">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="nombre">Nombre</label>
@@ -101,16 +101,18 @@ const Registrar = () => {
                 onChange={e => setNombre(e.target.value)}
             />
           </div>
-          <div className="p-2 mt-5">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="N_documento">Numero de documento</label>
+          <div className="p-2 ">
+            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="apellido">Apellido</label>
             <input 
-                id="N_documento"
-                type="number" 
-                className="p-3 border rounded-xl bg-gray-50"
-                value={N_documento}
-                onChange={e => setN_documento(e.target.value)}
+                id="apellido"
+                type="text" 
+                placeholder="apellido de usuario"
+                className="w-100 mt-3 p-3 border rounded-xl bg-gray-50"
+                value={apellido}
+                onChange={e => setApellido(e.target.value)}
             />
-          </div>
+            </div>
+          
           <div className="my-5 p-2">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
             <input 
@@ -125,17 +127,7 @@ const Registrar = () => {
       </div>
 
         <div className="">
-        <div className="p-2 ">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="apellido">Apellido</label>
-            <input 
-                id="apellido"
-                type="text" 
-                placeholder="apellido de usuario"
-                className="w-100 mt-3 p-3 border rounded-xl bg-gray-50"
-                value={apellido}
-                onChange={e => setApellido(e.target.value)}
-            />
-            </div>
+          
           <div className="mr-7 p-2 mt-4">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="P_formacion">Programa de formacion</label>
             <input 
@@ -151,16 +143,16 @@ const Registrar = () => {
           <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="ficha">Ficha</label>
             <input 
                 id="ficha"
-                type="number" 
+                type="text" 
                 className=" mt-3 p-3 border rounded-xl bg-gray-50"
                 value={ficha}
-                onChange={e => setFicha(e.target.value)}
+                onChange={e => {
+                  const value = e.target.value.replace(/\D/g, '');
+                  setFicha(value)
+                }}
             />
           </div>
-        </div>
-        <div>
-        <div className="">
-        <div className="p-2 ">
+          <div className="p-2 ">
               <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="TD">Tipo de documento</label>
                 <select
                   id="TD"
@@ -174,6 +166,23 @@ const Registrar = () => {
                     ))}
                 </select>
             </div>
+        </div>
+        <div>
+        <div className="">
+        
+            <div className="p-2 mt-5">
+            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="N_documento">Numero de documento</label>
+            <input 
+                id="N_documento"
+                type="text" 
+                className="p-3 border rounded-xl bg-gray-50"
+                value={N_documento}
+                onChange={e => {
+                  const value = e.target.value.replace(/\D/g, '');
+                  setN_documento(value)
+                }}
+            />
+          </div>
           <div className="mr-7 p-2 mt-5">
           <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
             <input 
@@ -204,7 +213,7 @@ const Registrar = () => {
           <input 
               type="submit"
               value='Registrar'
-              className="bg-green-600 p-20 mb-5 py-3 text-white uppercase font-bold rounded
+              className="bg-green-600 mt-10 p-20 mb-5 py-3 text-white uppercase font-bold rounded
                   hover:cursor-pointer hover:bg-green-800 transition-color"
           />
         </div>

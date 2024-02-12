@@ -58,7 +58,7 @@ const FormularioConvocatoria = () => {
     }
     const { msg } = alerta
   return (
-    <form className="bg-white py-10 px-5 md:w-300 rounded-lg shadow" onSubmit={handleSubmit}>
+    <form className="my-10 bg-white shadow rounded-lg p-10" onSubmit={handleSubmit}>
         {msg && <Alerta alerta={alerta} />}
         
         <div className="mb-5">

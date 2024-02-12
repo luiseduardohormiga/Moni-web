@@ -7,7 +7,6 @@ import {
     eliminarConvocatoria,
 } from '../controllers/convocatoriaController.js'
 import checkAuth from '../middleware/checkAuth.js'
-//import uploadMiddelware from '../middleware/MulterMiddelware.js'
 
 const router = express.Router()
 
@@ -21,10 +20,5 @@ router
     .get(checkAuth, obtenerConvocatoria)
     .put(checkAuth, editarConvocatoria)
     .delete(checkAuth, eliminarConvocatoria)
-
-
-
-    //.get(checkAuth, obtenerConvocatorias)
-//router.get('/postulacion/:id', checkAuth, obtenerPostulaciones)
 
 export default router
