@@ -15,28 +15,25 @@ const ConvocatoriasProvider = ({children}) =>{
     const navigate = useNavigate()
 
     useEffect(() => {
-        const obtenerConvocatorias = async (state) => {
+        const obtenerConvocatorias = async () => {
             try {
-                const token = localStorage.getItem('token')
-            if(!token){
-                const { data } = await clienteAxios('/convocatorias')
-                setConvocatorias(data)
-            }else{
-                const config ={
-                    headers:{
+                const token = localStorage.getItem('token');
+                const config = token ? {
+                    headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`
                     }
-                }
-                const { data } = await clienteAxios('/convocatorias', config)
-                setConvocatorias(data)
-            }
+                } : {};
+    
+                const { data } = await clienteAxios.get('/convocatorias', config);
+                setConvocatorias(data);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
-        obtenerConvocatorias()
-    })
+    
+        obtenerConvocatorias();
+    }, []);
 
     
     const  mostrarAlerta = alerta => {

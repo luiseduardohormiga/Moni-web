@@ -7,7 +7,7 @@ const Convocatorias = () => {
 
   const { auth } = useAuth()
   const { convocatorias } = useConvocatorias()
-  //console.log(convocatorias)
+  console.log(convocatorias)
   return (
     <>
     <div className="flex gap-9">

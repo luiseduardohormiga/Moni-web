@@ -23,7 +23,7 @@ const FormularioConvocatoria = () => {
             setImg(convocatoria.img)
             setFechaInicio(convocatoria.fechaInicio?.split('T')[0])
             setFechaFinalizacion(convocatoria.fechaFinalizacion?.split('T')[0])
-        } 
+        }
     }, [params])
 
     const handleFileChange = (e) => {
@@ -33,6 +33,7 @@ const FormularioConvocatoria = () => {
     
     const handleSubmit = async e =>{
         e.preventDefault()
+        
         if (titulo.trim() === '') {
             alert('La convocatoria necesita un Titulo');
             return;
@@ -46,7 +47,7 @@ const FormularioConvocatoria = () => {
         }
     
         //pasar al provider
-        await submitConvocatoria({ id, titulo, descripcion, img, fechaInicio, fechaFinalizacion, img})
+        await submitConvocatoria({ id, titulo, descripcion, img, fechaInicio, fechaFinalizacion})
         setId('')
         setTitulo('')
         setDescripcion('')

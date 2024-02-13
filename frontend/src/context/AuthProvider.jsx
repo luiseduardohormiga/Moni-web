@@ -12,26 +12,25 @@ const AuthProvider = ({children}) => {
     const [usuario, setUsuario] = useState({})  
 
     const navigate = useNavigate()
-
+    
     useEffect(() => {
-        const obtenerUsuarios = async (state) => {
+        const obtenerUsuarios = async () => {
             try {
-                const token = localStorage.getItem('token')
-                if (!token) return
-                    const config ={
-                        headers:{
-                            "Content-Type": "aplication/json",
-                            Authorization: `Bearer ${token}`
-                        }
+                const token = localStorage.getItem('token');
+                const config = token ? {
+                    headers:{
+                        "Content-Type": "aplication/json",
+                        Authorization: `Bearer ${token}`
                     }
-                    const { data } = await clienteAxios('/usuarios', config)
-                    setUsuarios(data)
+                } : {};
+                const { data } = await clienteAxios('/usuarios', config)
+                setUsuarios(data)
             } catch (error) {
                 console.log(error)
             }
         }
         obtenerUsuarios()
-    })
+    }, []);
 
     const  mostrarAlerta = alerta => {
         setAlerta(alerta)
