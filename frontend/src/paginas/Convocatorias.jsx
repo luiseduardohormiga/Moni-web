@@ -2,12 +2,22 @@ import useConvocatorias from "../hooks/useConvocatorias"
 import PreviewConvocatoria from "../components/PreviewConvocatoria"
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
+import { useState } from "react"
 
 const Convocatorias = () => {
-
+  const [busqueda, setBusqueda] = useState('');
   const { auth } = useAuth()
   const { convocatorias } = useConvocatorias()
-  console.log(convocatorias)
+  //console.log(convocatorias)
+
+  const handleBusquedaChange = (event) => {
+    setBusqueda(event.target.value);
+  };
+
+  const convocatoriasFiltradas = convocatorias.filter(convocatoria =>
+    convocatoria.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <>
     <div className="flex gap-9">
@@ -24,17 +34,28 @@ const Convocatorias = () => {
       :
       ''
       }
+      <div className="flex">
+      <p className="font-bold mr-5 uppercase mt-5">Buscar Convocatoria</p>
+          <input
+            type="text"
+            placeholder="Buscar convocatorias..."
+            value={busqueda} 
+            onChange={handleBusquedaChange}
+            className="border border-gray-300 p-3"
+          /> 
+      </div>
     </div>
+
       
       
-      <div className="bg-white shadow mt-10 rounded-lg ">
-        {convocatorias.length ?
-          convocatorias.map(convocatoria =>(
+    <div className="bg-white shadow mt-10 rounded-lg ">
+        {convocatoriasFiltradas.length ?
+          convocatoriasFiltradas.map(convocatoria =>(
             <PreviewConvocatoria
               key={convocatoria._id}
               convocatoria={convocatoria}
-            />
-          )) 
+              />
+            )) 
         : <p className="text-center text-gray-600 uppercase p-5">No hay Convocatorias </p>}
       </div>
     </>

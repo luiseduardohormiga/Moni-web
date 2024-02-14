@@ -25,11 +25,6 @@ const FormularioConvocatoria = () => {
             setFechaFinalizacion(convocatoria.fechaFinalizacion?.split('T')[0])
         }
     }, [params])
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setImg(file)
-    }
     
     const handleSubmit = async e =>{
         e.preventDefault()
@@ -55,11 +50,11 @@ const FormularioConvocatoria = () => {
         setFechaInicio('')
         setFechaFinalizacion('')
 
-        console.log(convocatoria)
+        //console.log(convocatoria)
     }
     const { msg } = alerta
   return (
-    <form className="my-10 bg-white shadow rounded-lg p-10" onSubmit={handleSubmit}>
+    <form enctype="multipart/form-data" className="my-10 bg-white shadow rounded-lg p-10" onSubmit={handleSubmit}>
         {msg && <Alerta alerta={alerta} />}
         
         <div className="mb-5">

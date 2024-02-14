@@ -74,7 +74,8 @@ const ConvocatoriasProvider = ({children}) =>{
         setTimeout(() => {
             setAlerta({})
             navigate('/convocatorias')
-        },2000)
+            window.location.reload();
+        },500)
         } catch (error) {
             console.log(error)
         }

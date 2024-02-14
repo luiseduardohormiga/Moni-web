@@ -13,7 +13,7 @@ const EditarUsuario = () => {
   }, [])
 
   const handleClick = ()=>{
-    if (confirm('deseas eliminar esta convocatoria?')) {
+    if (confirm('deseas eliminar este usuario?')) {
         eliminarUsuario(params.id)
     } 
 }

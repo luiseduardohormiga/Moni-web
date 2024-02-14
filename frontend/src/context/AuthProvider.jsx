@@ -101,7 +101,8 @@ const AuthProvider = ({children}) => {
                 setTimeout(() => {
                     setAlerta({})
                     navigate('/usuarios')
-                },2000)
+                    window.location.reload();
+                },500)
            } catch (error) {
             console.log(error)
            }
@@ -127,7 +128,8 @@ const AuthProvider = ({children}) => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/usuarios')
-            },2000)
+                window.location.reload();
+            },500)
         } catch (error) {
             console.log(error)
         }

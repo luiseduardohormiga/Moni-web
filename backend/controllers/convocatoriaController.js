@@ -93,7 +93,7 @@ const eliminarConvocatoria = async (req, res)=>{
         }
         await convocatoria.deleteOne()
         res.json({msg: "convocatoria Eliminada"})
-        console.log(convocatoria)
+        //console.log(convocatoria)
     } catch (error) {
         console.log(error)
     }

@@ -17,7 +17,7 @@ const Convocatoria = () => {
         obtenerConvocatoria(params.id)
     }, [])
     const { titulo } = convocatoria
-    console.log(convocatoria)
+    //console.log(convocatoria)
     if (cargando) return 'cargando...'
   return (
     <>
