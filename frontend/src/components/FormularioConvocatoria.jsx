@@ -11,8 +11,20 @@ const FormularioConvocatoria = () => {
     const [img, setImg] = useState(null)
     const [fechaInicio, setFechaInicio] = useState('')
     const [fechaFinalizacion, setFechaFinalizacion] = useState('')
-            
+    const [imagenPreview, setImagenPreview] = useState(null)
+    
     const params = useParams()
+
+    const handleImagenChange = (e) => {
+        const nuevaImagen = e.target.files[0];
+    
+        // Actualizar el estado de la imagen para enviar al servidor
+        setImg(nuevaImagen);
+    
+        // Crear una URL de objeto para la previsualización
+        const nuevaImagenPreview = URL.createObjectURL(nuevaImagen);
+        setImagenPreview(nuevaImagenPreview);
+    };
     
     const { mostrarAlerta, alerta, submitConvocatoria, convocatoria } = useConvocatorias()
     useEffect(() => {
@@ -26,6 +38,7 @@ const FormularioConvocatoria = () => {
         }
     }, [params])
     
+  
     const handleSubmit = async e =>{
         e.preventDefault()
         
@@ -54,7 +67,7 @@ const FormularioConvocatoria = () => {
     }
     const { msg } = alerta
   return (
-    <form enctype="multipart/form-data" className="my-10 bg-white shadow rounded-lg p-10" onSubmit={handleSubmit}>
+    <form encType="multipart/form-data" className="my-10 bg-white shadow rounded-lg p-10" onSubmit={handleSubmit}>
         {msg && <Alerta alerta={alerta} />}
         
         <div className="mb-5">
@@ -85,14 +98,22 @@ const FormularioConvocatoria = () => {
             />
         </div>
         <div className="mb-5">
+            <div>
+            {imagenPreview && (
+                <img
+                    src={imagenPreview}
+                    alt="Previsualización de la imagen"
+                    className="mt-2 rounded-md max-w-full"
+                />
+            )}
+            </div>
             <label className="text-gray-700 uppercase font-bold text-sm" htmlFor="imagen">Imagen de Portada</label>
-            <input 
+            <input
                 id="imagen"
                 type="file"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                onChange={e => setImg(e.target.files[0])} 
+                onChange={handleImagenChange}
                 accept="image/*"
-                //value={img}
             />
         </div>
         <div className="mb-5">
@@ -142,6 +163,7 @@ const FormularioConvocatoria = () => {
       <input type="submit" value={id ? 'Actualizar convocatoria' : 'Crear convocatoria'} 
       className="bg-green-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-green-700 transition-colors" 
       />
+      
     </form>
   )
 }

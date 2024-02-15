@@ -16,7 +16,7 @@ const Convocatoria = () => {
     useEffect(() =>{
         obtenerConvocatoria(params.id)
     }, [])
-    const { titulo } = convocatoria
+    const { titulo, descripcion, fechaInicio, fechaFinalizacion } = convocatoria
     //console.log(convocatoria)
     if (cargando) return 'cargando...'
   return (
@@ -53,7 +53,22 @@ const Convocatoria = () => {
             </button>
             }
         </div>
-        {auth.rol === 'Aprendiz' ? 'hola' : 
+        {auth.rol === 'Aprendiz' ? 
+          <div className="bg-white p-10 mt-10">
+            <h2 className="font-black text-2xl uppercase text-center">Requisitos de la convocatoria</h2>
+            <p className="text-center">{descripcion}</p>
+            <div className="flex justify-center mt-10">
+              <div className="mr-20">
+                <h2>FECHA DE INICIO</h2>
+                {fechaInicio}
+              </div>
+              <div>
+                <h2>FECHA DE FINALIZACION</h2>
+                {fechaFinalizacion}
+              </div>
+            </div>
+            </div> 
+            : 
         <div>
         <h1 className="font-black text-3xl capitalize text-center mt-10">POSTULADOS A LA CONVOCATORIA</h1>
         <div className="bg-white shadow mt-10 rounded-lg">

@@ -84,9 +84,13 @@ const ConvocatoriasProvider = ({children}) =>{
     try {
         const token = localStorage.getItem('token')
         if(!token) return
+        const form = new FormData()
+        for (let key in convocatoria){
+            form.append(key, convocatoria[key])
+        }
         const config ={
             headers:{
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         }

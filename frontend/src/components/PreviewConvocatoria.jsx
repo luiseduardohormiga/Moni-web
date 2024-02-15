@@ -8,10 +8,11 @@ const PreviewConvocatoria = ({convocatoria}) => {
   return (
     <>
       <div className="border-b p-5 flex">
-          <div className="flex mr-7">
+          <div className="flex mr-7 m-5">
               {convocatoria.img && <img src={img.url} alt="imagen"/>}
-              <div className="ml-10 mr-20">
+              <div className="ml-10 mr-60 text-center">
                 <h1 className="uppercase font-bold">{titulo}</h1>
+                <h2 className="uppercase">Requisitos a cumplir:</h2>
                 <span className="text-sm text-gray-500 uppercase">{' '}
                   {descripcion}
                 </span>

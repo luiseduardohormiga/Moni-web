@@ -14,6 +14,18 @@ const postulacionesSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Convocatoria",
     },
+    calificacionAdmin:{
+        type: String,
+        trim: true
+    },
+    calificacionInstructor:{
+        type: String,
+        trim: true
+    },
+    calificacionPsicologo:{
+        type: String,
+        trim: true
+    },
 },{
     timestamps: true
 })
