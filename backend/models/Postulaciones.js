@@ -5,10 +5,11 @@ const postulacionesSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Usuario"
     },
-    archivoPDF:{
-        type: String,
-        require: true,
-        trim: true,
+    pdf:{
+        url: String,
+        public_id: String,
+        //trim: true,
+        //require: true,
     },
     convocatoria:{
         type: mongoose.Schema.Types.ObjectId,

@@ -36,7 +36,7 @@ const PreviewConvocatoria = ({convocatoria}) => {
               >Ingresar</Link>
             : 
             <Link to={`${_id}`} className="text-gray-500 hover:text-gray-800 uppercase text-sm font-bold"
-            >Postularce</Link>
+            >Postularse</Link>
             }
           </div>
           

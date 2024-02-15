@@ -9,7 +9,6 @@ const ConvocatoriasProvider = ({children}) =>{
     const [alerta, setAlerta] = useState({})
     const [convocatoria, setConvocatoria] = useState({})
     const [cargando, setCargando] = useState(false)
-    const [ modalFormularioPostulacion, setModalFormularioPostulacion] = useState(false)
 
 
     const navigate = useNavigate()
@@ -159,9 +158,7 @@ const ConvocatoriasProvider = ({children}) =>{
         console.log(error)
     }
    }
-   const handleModalPostulacion = () => {
-        setModalFormularioPostulacion(!modalFormularioPostulacion)
-   }
+
    const submitPostulacion = async postulacion => {
     try {
         const token = localStorage.getItem('token')
@@ -189,8 +186,6 @@ const ConvocatoriasProvider = ({children}) =>{
                 convocatoria,
                 cargando,
                 eliminarConvocatoria,
-                modalFormularioPostulacion,
-                handleModalPostulacion,
                 submitPostulacion
             }}
         >{children}

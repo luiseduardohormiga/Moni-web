@@ -85,7 +85,7 @@ const eliminarConvocatoria = async (req, res)=>{
     }
     if (convocatoria.creador.toString() !== req.usuario._id.toString()) {
         const error = new Error("Accion no valida")
-        return res.status(401).json({msg: error.message})
+        return res.status(403).json({msg: error.message})
     }
     try {
         if (convocatoria.img.public_id) {
