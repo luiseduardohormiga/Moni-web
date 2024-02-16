@@ -45,15 +45,15 @@ const Convocatoria = () => {
         </div>
         {auth.rol === 'Aprendiz' ? 
           <div className="bg-white p-10 mt-10">
-            <h2 className="font-black text-2xl uppercase text-center">Requisitos de la convocatoria</h2>
+            <h2 className="font-black text-2xl uppercase text-center mb-5">Requisitos de la convocatoria</h2>
             <p className="text-center">{descripcion}</p>
             <div className="flex justify-center mt-10">
               <div className="mr-20">
-                <h2>FECHA DE INICIO</h2>
+                <h2 className="font-black text-2xl uppercase">FECHA DE INICIO</h2>
                 {fechaInicio}
               </div>
               <div>
-                <h2>FECHA DE FINALIZACION</h2>
+                <h2 className="font-black text-2xl uppercase">FECHA DE FINALIZACION</h2>
                 {fechaFinalizacion}
               </div>
             </div>

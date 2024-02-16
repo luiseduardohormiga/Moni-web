@@ -9,6 +9,7 @@ const ConvocatoriasProvider = ({children}) =>{
     const [alerta, setAlerta] = useState({})
     const [convocatoria, setConvocatoria] = useState({})
     const [cargando, setCargando] = useState(false)
+    const [postulaciones, setPostulaciones] = useState([])
 
 
     const navigate = useNavigate()
@@ -161,20 +162,34 @@ const ConvocatoriasProvider = ({children}) =>{
 
    const submitPostulacion = async postulacion => {
     try {
-        const token = localStorage.getItem('token')
-        if(!token) return
-        const config ={
-            headers:{
-                "Content-Type": "application/json",
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const form = new FormData();
+        for (let key in postulacion) {
+            form.append(key, postulacion[key]);
+        }
+
+        const config = {
+            headers: {
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
-        }
-        const { data } = await clienteAxios.post('/postulaciones', postulacion, config)
-        console.log(data)
+        };
+        const { data } = await clienteAxios.post('/postulaciones', form, config);
+        setPostulaciones([...postulaciones, data]);
+        mostrarAlerta({
+            msg: 'postulacion subida correctamente',
+            error: false,
+        });
     } catch (error) {
-        console.log(error)
+        console.error(error);
+        mostrarAlerta({
+            msg: 'Error al subir la postulacion',
+            error: true,
+        });
     }
-   }
+};
     return(
         <ConvocatoriasContext.Provider
             value={{

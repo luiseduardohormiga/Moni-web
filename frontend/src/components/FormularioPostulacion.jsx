@@ -1,25 +1,31 @@
-import { Fragment, useState, useEffect } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { useState, useEffect } from 'react'
 import useConvocatorias from '../hooks/useConvocatorias'
 import Alerta from './Alerta'
 import { useParams } from 'react-router-dom'
 
 const FormularioPostulacion = () => {
-    const [archivoPDF, setArchivoPDF] = useState('')
+    const [pdf, setPdf] = useState(null)
     const params = useParams()
 
-    const { mostrarAlerta, alerta, submitPostulacion} = useConvocatorias()
+    const handleFileChange = (e) => {
+      const nuevoArchivo = e.target.files[0];
+      setPdf(nuevoArchivo)
+      console.log(nuevoArchivo)
+    }
 
-    const handleSubmit = e => {
+    const { mostrarAlerta, alerta, submitPostulacion} = useConvocatorias()
+    const handleSubmit = async e => {
         e.preventDefault()
-        if ([archivoPDF].includes('')) {
+
+        if (!pdf) {
           mostrarAlerta({
-            msg: 'campo obligatorio',
+            msg: 'El campo es obligatorio',
             error: true,
-          })
-          return
+          });
+          return;
         }
-        submitPostulacion({archivoPDF, convocatoria: params.id})
+        await submitPostulacion({ pdf, convocatoria: params.id })
+        setPdf(null)
         mostrarAlerta({
           msg: 'postulacion subida correctamente',
           error: false,
@@ -30,18 +36,16 @@ const FormularioPostulacion = () => {
 
   return (
     <div>
-        <form 
-            onSubmit={handleSubmit}
-            className="my-10">
+        <form encType="multipart/form-data" onSubmit={handleSubmit} className="my-10">
             <div className="mb-5">
             <h1 className='text-center font-bold text-2xl uppercase'>Sube tu hoja de vida</h1>
             {msg && <Alerta alerta={alerta}/>}
             <input 
                 type="file" 
-                id='archivoPDF'
+                id='pdf'
                 className='border-2 w-full p-2 mt-10 bg-gray-300 placeholder-gray-400 rounded-md'
                 accept="application/pdf"
-                onChange={e => setArchivoPDF(e.target.value)}
+                onChange={handleFileChange}
             />
             </div>
             <input type="submit"

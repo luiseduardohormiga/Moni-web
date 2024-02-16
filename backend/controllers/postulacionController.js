@@ -18,9 +18,7 @@ const postularce = async (req, res) => {
                 url: result.secure_url,
                 public_id: result.public_id
             }
-        }else{
-        console.log(error)
-        }
+        }
 
     const postulacion = new Postulacion({
         ...req.body,
@@ -86,12 +84,10 @@ const eliminarPostularcion = async (req, res) => {
     try {
         if (postulacion.pdf.public_id) {
             await deleteFile(postulacion.pdf.public_id)
-        }else{
-            console.log(error)
         }
         await postulacion.deleteOne()
         res.json({msg: 'postulacion eliminada'})
-        console.log(postulacion)
+        //console.log(postulacion)
     } catch (error) {
         console.log(error)
     }

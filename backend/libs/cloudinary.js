@@ -1,5 +1,4 @@
 import { v2 as cloudinary } from 'cloudinary'
-import fileUpload from 'express-fileupload'
 
 cloudinary.config({
     cloud_name: "dbt6xuonu",
@@ -7,20 +6,23 @@ cloudinary.config({
     api_secret: "gOM9oVyNTqwFuC9-AiI5m4ABf5w"
 })
 
+//IMG
 export const uploadImage = async filePath => {
     return await cloudinary.uploader.upload(filePath, {
         folder: 'convocatorias'
     })
 }
-
 export const deleteImg = async id => {
     return await cloudinary.uploader.destroy(id)
 }
+
+//ARCHIVO
 export const uploadFile = async filePath => {
     return await cloudinary.uploader.upload(filePath, {
-        folder: 'archivos'
+        folder: 'archivos',
+        resource_type: 'raw'
     })
 }
 export const deleteFile = async id => {
-    return await cloudinary.uploader.destroy(id)
+    return await cloudinary.uploader.destroy(id, { resource_type: 'raw' })
 }
