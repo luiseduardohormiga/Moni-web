@@ -102,7 +102,7 @@ const AuthProvider = ({children}) => {
                     setAlerta({})
                     navigate('/usuarios')
                     window.location.reload();
-                },500)
+                },1000)
            } catch (error) {
             console.log(error)
            }
@@ -131,8 +131,13 @@ const AuthProvider = ({children}) => {
                 window.location.reload();
             },500)
         } catch (error) {
-            console.log(error)
+            if (error.response && error.response.data && error.response.data.msg) {
+                throw new Error(error.response.data.msg); // Devolver el mensaje de error del servidor
+            } else {
+                throw new Error("Error al crear el usuario");
+            }
         }
+        return {nuevoUsuario, alerta}
        }
     
     

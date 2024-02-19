@@ -54,16 +54,29 @@ const obtenerConvocatoria = async (req, res)=>{
     res.json( convocatoria )
 }
 const editarConvocatoria = async (req, res)=>{
+    if (req.usuario.rol === "admin") {}
     const { id } = req.params
     const convocatoria = await Convocatoria.findById(id)
     if (!convocatoria) {
         const error = new Error("No encontrada")
         return res.status(404).json({msg: error.message})
     }
-    if (convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("Accion no valida")
-        return res.status(401).json({msg: error.message})
+    
+    // Actualizar imagen si se envía una nueva imagen
+    if (req.files?.img) {
+        const result = await uploadImage(req.files.img.tempFilePath)
+        // Eliminar la imagen anterior del Cloudinary
+        if (convocatoria.img && convocatoria.img.public_id) {
+            await deleteImg(convocatoria.img.public_id);
+        }
+        convocatoria.img = {
+            url: result.secure_url,
+            public_id: result.public_id
+        }
+        // Eliminar el archivo temporal de la imagen
+        await fs.remove(req.files.img.tempFilePath);
     }
+    
     convocatoria.titulo = req.body.titulo || convocatoria.titulo
     convocatoria.descripcion = req.body.descripcion || convocatoria.descripcion
     convocatoria.fechaInicio = req.body.fechaInicio || convocatoria.fechaInicio
@@ -82,10 +95,6 @@ const eliminarConvocatoria = async (req, res)=>{
     if (!convocatoria) {
         const error = new Error("No encontrada")
         return res.status(404).json({msg: error.message})
-    }
-    if (convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("Accion no valida")
-        return res.status(403).json({msg: error.message})
     }
     try {
         if (convocatoria.img.public_id) {

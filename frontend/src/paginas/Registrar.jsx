@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
-import useAuth from "../hooks/useAuth"
 
 const TIPO_DOCUMENTO = ['TI', 'CC', 'CE']
 
@@ -20,8 +19,7 @@ const Registrar = () => {
   const [ alerta, setAlerta ] = useState({})
 
   const navigate = useNavigate()
-
-  const params = useParams()
+  //const params = useParams()
 
   const handleSubmit = async e => {
     e.preventDefault()

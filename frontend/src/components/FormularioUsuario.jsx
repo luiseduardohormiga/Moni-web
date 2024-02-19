@@ -7,76 +7,73 @@ const TIPO_DOCUMENTO = ['TI', 'CC', 'CE']
 const ROL = ['Aprendiz', 'admin', 'instructor', 'psicologo']
 
 const FormularioUsuario = () => {
-    const [id, setId] = useState(null)
-    const [ nombre, setNombre ] = useState('')
-    const [ apellido, setApellido ] = useState('')
-    const [ tipo_documento, setTipo_documento ] = useState('')
-    const [ N_documento, setN_documento ] = useState('')
-    const [ P_formacion, setP_formacion ] = useState('')
-    const [ ficha, setFicha ] = useState('')
-    const [ email, setEmail ] = useState('')
-    const [ rol, setRol ] = useState('')
-    const [ password, setPassword ] = useState('')
-    const [ repetirPassword, setRepetirPassword ] = useState('')
-
-  
+  const [id, setId] = useState(null);
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [tipo_documento, setTipo_documento] = useState('');
+  const [N_documento, setN_documento] = useState('');
+  const [P_formacion, setP_formacion] = useState('');
+  const [ficha, setFicha] = useState('');
+  const [email, setEmail] = useState('');
+  const [rol, setRol] = useState('');
+  const [password, setPassword] = useState('');
+  const [repetirPassword, setRepetirPassword] = useState('');
+  const [error, setError] = useState('');
 
     const params = useParams()
-    const { mostrarAlerta, alerta, submitUsuario, usuario } = useAuth()
+    const { alerta, submitUsuario, usuario } = useAuth()
     
     useEffect(() => {
       if (params.id) {
-        setId(usuario._id)
-        setNombre(usuario.nombre)
-        setApellido(usuario.apellido)
-        setTipo_documento(usuario.tipo_documento)
-        setN_documento(usuario.N_documento)
-        setP_formacion(usuario.P_formacion)
-        setFicha(usuario.ficha)
-        setEmail(usuario.email)
-        setRol(usuario.rol)
-        setPassword(usuario.password)
-        setRepetirPassword(usuario.password)
+          setId(usuario._id);
+          setNombre(usuario.nombre);
+          setApellido(usuario.apellido);
+          setTipo_documento(usuario.tipo_documento);
+          setN_documento(usuario.N_documento);
+          setP_formacion(usuario.P_formacion);
+          setFicha(usuario.ficha);
+          setEmail(usuario.email);
+          setRol(usuario.rol);
+          setPassword(usuario.password);
+          setRepetirPassword(usuario.password);
       }
-    }, [params])
+  }, [params]);
 
-
-    const handleSubmit = async e => {
-        e.preventDefault()
-        if ([nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol, password, repetirPassword ].includes('')) {
-            mostrarAlerta({
-                msg: "todos los campos son obligatorios",
-                error: true
-              })
-              return
-        }
-        if (password !== repetirPassword) {
-          mostrarAlerta({
-              msg: "las contraseñas no coinciden",
-              error: true
-            })
-            return
-          }
-          if (password.length < 6) {
-            mostrarAlerta({
-              msg: "la contraseña es muy corta, minimo 6 caracteres",
-              error: true
-            })
-            return
-          }
-          //pasar al provider
-            await submitUsuario({ id, nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol, password, repetirPassword })
-            setId('')
-            setNombre('')
-            setApellido('')
-            setTipo_documento('')
-            setN_documento('')
-            setP_formacion('')
-            setFicha('')
-            setEmail('')
-            setRol('')
-            setPassword('')
-            setRepetirPassword('')
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError('');
+       // Validación de campos vacíos
+       if ([nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol, password, repetirPassword].includes('')) {
+        setError("Todos los campos son obligatorios");
+        return;
+    }
+    
+    // Validación de contraseña
+    if (password !== repetirPassword) {
+        setError("Las contraseñas no coinciden");
+        return;
+    }
+    if (password.length < 6) {
+        setError("La contraseña es muy corta, mínimo 6 caracteres");
+        return;
+    }
+        
+    try {
+      await submitUsuario({ id, nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol, password, repetirPassword });
+      setId('');
+      setNombre('');
+      setApellido('');
+      setTipo_documento('');
+      setN_documento('');
+      setP_formacion('');
+      setFicha('');
+      setEmail('');
+      setRol('');
+      setPassword('');
+      setRepetirPassword('');
+  } catch (error) {
+      setError(error.message); 
+  }
     }
     const { msg } = alerta 
   return (
@@ -84,7 +81,8 @@ const FormularioUsuario = () => {
     <form 
     className="my-7 bg-white shadow rounded-lg p-10"
     onSubmit={handleSubmit}>
-        {msg && <Alerta alerta={alerta} />}
+        {error && <Alerta alerta={{ msg: error, error: true }} />}
+        {msg && <Alerta alerta={{ msg: msg }} />}
         {id ? 
         <div className="flex justify-center">
 

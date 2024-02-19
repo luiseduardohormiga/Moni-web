@@ -5,6 +5,15 @@ import fs from 'fs-extra'
 
 const postularce = async (req, res) => {
     const { convocatoria } = req.body
+    const { _id: userId } = req.usuario
+
+    //usuario solo puede postularse una sola vez
+    const existePostulacion = await Postulacion.findOne({ convocatoria, Postulado: userId });
+    if (existePostulacion) {
+        // Si el usuario ya está postulado, devolver un error
+        return res.status(400).json({ msg: "El usuario ya está postulado a esta convocatoria" });
+    }
+    //verificar que la convocatoria exista
     const existeConvocatoria = await Convocatoria.findById(convocatoria)
     if (!existeConvocatoria) {
         const error = new Error("la convocatoria no existe")
@@ -76,10 +85,6 @@ const eliminarPostularcion = async (req, res) => {
     if (!postulacion) {
         const error = new Error("postulacion no existe")
         return res.status(404).json({msg: error.message})
-    }
-    if (postulacion.convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("Accion no valida")
-        return res.status(403).json({msg: error.message})
     }
     try {
         if (postulacion.pdf.public_id) {

@@ -35,6 +35,9 @@ const FormularioConvocatoria = () => {
             setImg(convocatoria.img)
             setFechaInicio(convocatoria.fechaInicio?.split('T')[0])
             setFechaFinalizacion(convocatoria.fechaFinalizacion?.split('T')[0])
+            if (convocatoria.img) {
+                setImagenPreview(convocatoria.img.url); // Establecer la URL de la imagen para mostrar la vista previa
+            }
         }
     }, [params])
     

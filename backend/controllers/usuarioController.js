@@ -38,13 +38,22 @@ const registrar = async (req, res) =>{
 }
 const nuevoUsuario = async (req, res) =>{
     const usuario = new Usuario(req.body)
+    const existeUsuario = await Usuario.findOne({ email })
+    if (existeUsuario) {
+        const error = new Error("Usuario ya Existe")
+        return res.status(400).json({ msg: error.message })
+        res.json({msg: 'usuario creado correctamente, reviza el email para confirmar la cuenta'})
+    }
     try {
         const usuaruioAlmacenado = await usuario.save()
         res.json(usuaruioAlmacenado)
+        res.json({msg: 'usuario creado correctamente, reviza el email para confirmar la cuenta'})
     } catch{
         console.log(error)
     }
 }
+
+
 const autenticar = async (req, res) =>{
     const {email, password} = req.body
 
@@ -175,6 +184,7 @@ const editarUsuario = async (req, res)=>{
     try {
         const usuarioAlmacenado = await usuario.save()
         res.json(usuarioAlmacenado)
+        res.json({msg: 'datos del usuario actualizado correctamente'})
     } catch (error) {
         console.log(error)
     }

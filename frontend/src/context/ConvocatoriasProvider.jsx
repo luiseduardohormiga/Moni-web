@@ -55,13 +55,21 @@ const ConvocatoriasProvider = ({children}) =>{
     const token = localStorage.getItem('token')
         try {
             if(!token) return
+
+            const formData = new FormData();
+            formData.append('titulo', convocatoria.titulo);
+            formData.append('descripcion', convocatoria.descripcion);
+            formData.append('fechaInicio', convocatoria.fechaInicio);
+            formData.append('fechaFinalizacion', convocatoria.fechaFinalizacion);
+            if (convocatoria.img) {
+                formData.append('img', convocatoria.img);
+            }
         const config ={
             headers:{
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             }
         }
-        const { data } = await clienteAxios.put(`/convocatorias/${convocatoria.id}`, convocatoria, config)
+        const { data } = await clienteAxios.put(`/convocatorias/${convocatoria.id}`, formData, config);
         // sincronizar el state
         const convocatoriaActualizada = convocatorias.map(convocatoriaState => convocatoriaState._id ===  data._id ? data : convocatoriaState)
         setConvocatoria(convocatoriaActualizada)
@@ -183,11 +191,13 @@ const ConvocatoriasProvider = ({children}) =>{
             error: false,
         });
     } catch (error) {
-        console.error(error);
-        mostrarAlerta({
-            msg: 'Error al subir la postulacion',
-            error: true,
-        });
+        if (error.response && error.response.data && error.response.data.msg) {
+            throw new Error(error.response.data.msg); // Devolver el mensaje de error del servidor
+
+        } else {
+            throw new Error("Error al crear el usuario");
+        }
+        
     }
 };
     return(
