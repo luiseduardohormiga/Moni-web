@@ -86,6 +86,7 @@ const Registrar = () => {
      >
      <h1 className="text-green-600 font-black text-6xl capitalize text-center mb-10">Registrate</h1>
       {msg && <Alerta alerta={alerta}/>}
+      
       <div className="md:flex">
       <div className="justify-center">
           <div className="p-2">
@@ -116,7 +117,7 @@ const Registrar = () => {
             <input 
                 id="email"
                 type="email" 
-                placeholder="Email de registo"
+                placeholder="correo electronico"
                 className="mt-3 p-3 border rounded-xl bg-gray-50"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
@@ -125,7 +126,6 @@ const Registrar = () => {
       </div>
 
         <div className="">
-          
           <div className="mr-7 p-2 mt-4">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="P_formacion">Programa de formacion</label>
             <input 
@@ -186,7 +186,7 @@ const Registrar = () => {
             <input 
                 id="password"
                 type="password" 
-                placeholder="Password de registo"
+                placeholder="Contraseña"
                 className="mt-3 p-3 border rounded-xl bg-gray-50"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -197,7 +197,7 @@ const Registrar = () => {
             <input 
                 id="password2"
                 type="password" 
-                placeholder="Repite el Password"
+                placeholder="Repite la Contraseña"
                 className="mt-3 p-3 border rounded-xl bg-gray-50"
                 value={repetirPassword}
                 onChange={e => setRepetirPassword(e.target.value)}

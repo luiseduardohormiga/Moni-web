@@ -7,7 +7,7 @@ const PreviewConvocatoriaInicio = ({convocatoria}) => {
   return (
         <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
             <div className="ml-10">
-                {convocatoria.img && <img className="w-full" src={img.url} alt="imagen"/>}
+                {convocatoria.img && <img src={img.url} alt="imagen" style={{ width: '85%', height: 'auto' }} />}
             </div>
             <div className="ml-10 mt-10">
                 <h1 className="uppercase font-black text-2xl text-center">{titulo}</h1>

@@ -7,18 +7,17 @@ const PreviewConvocatoria = ({convocatoria}) => {
 
   return (
     <>
-      <div className="border-b p-5 flex">
-          <div className="flex mr-7 m-5">
-              {convocatoria.img && <img src={img.url} alt="imagen"/>}
-              <div className="ml-10 mr-60 text-center">
-                <h1 className="uppercase font-bold">{titulo}</h1>
-                <h2 className="uppercase">Requisitos a cumplir:</h2>
-                <span className="text-sm text-gray-500 uppercase">{' '}
+    <div className="shadow rounded-lg p-5 md:p-10 justify-center mr-10 w-full">
+    <div className="md:flex m-5">
+          {convocatoria.img && <img src={img.url} alt="imagen" style={{ width: '70%' }} />}
+          <div className="md:ml-5 md:mr-10 text-center">
+                <h1 className="uppercase font-bold mt-5">{titulo}</h1>
+                <h2 className="uppercase mt-3">Requisitos a cumplir:</h2>
+                <span className="text-sm text-gray-500 uppercase mt-5">{' '}
                   {descripcion}
                 </span>
               </div>
-          </div>
-          <div>
+              <div className="text-center mt-3 md:mt-0">
             {auth.rol === 'admin'?
               <Link
               to={`${_id}`} 
@@ -39,8 +38,7 @@ const PreviewConvocatoria = ({convocatoria}) => {
             >Postularse</Link>
             }
           </div>
-          
-            
+          </div>
       </div>
     </>
   )

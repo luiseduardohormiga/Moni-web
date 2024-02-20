@@ -20,35 +20,36 @@ const Convocatorias = () => {
 
   return (
     <>
-    <div className="flex gap-9">
-      <h1 className="text-4xl p-3 font-black ">Convocatorias</h1>
+    <div className="md:flex gap-6">
+      <h1 className="text-4xl p-3 font-black md:mt-10 ">Convocatorias</h1>
       {auth.rol === 'admin'?
-      <div>
+      <div className="mt-10 bg-green-600 rounded-lg flex p-3">
         <Link
           to='crear-convocatoria'
-          className="bg-green-600 p-3 text-white uppercase font-bold mt-5 text-cente rounded-lg flex"
+          className=" p-3 text-white uppercase font-bold"
           >Nueva Convocatoria
-        <img className="w-7 ml-5" src="/public/mas2.png"/>
         </Link>
+        
+        <img className="w-10 h-10 md:mt-7" src="/public/mas2.png"/>
       </div>
       :
       ''
       }
-      <div className="flex">
+      <div className="md:flex mt-10">
       <p className="font-bold mr-5 uppercase mt-5">Buscar Convocatoria</p>
           <input
             type="text"
             placeholder="Buscar convocatorias..."
             value={busqueda} 
             onChange={handleBusquedaChange}
-            className="border border-gray-300 p-3"
+            className="border border-gray-300 p-3 lg:mt-5"
           /> 
       </div>
     </div>
 
       
       
-    <div className="bg-white shadow mt-10 rounded-lg ">
+    <div className="bg-white shadow mt-10 rounded-lg">
         {convocatoriasFiltradas.length ?
           convocatoriasFiltradas.map(convocatoria =>(
             <PreviewConvocatoria

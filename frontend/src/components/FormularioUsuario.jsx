@@ -78,15 +78,14 @@ const FormularioUsuario = () => {
     const { msg } = alerta 
   return (
     <>
-    <form 
+      <form 
     className="my-7 bg-white shadow rounded-lg p-10"
     onSubmit={handleSubmit}>
         {error && <Alerta alerta={{ msg: error, error: true }} />}
         {msg && <Alerta alerta={{ msg: msg }} />}
         {id ? 
-        <div className="flex justify-center">
-
-<div className="justify-center">
+        <div className="md:flex">
+      <div className="justify-center">
           <div className="p-2">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="nombre">Nombre</label>
             <input 
@@ -98,16 +97,17 @@ const FormularioUsuario = () => {
                 onChange={e => setNombre(e.target.value)}
             />
           </div>
-          <div className="p-2 mt-5">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="N_documento">Numero de documento</label>
+          <div className="p-2 ">
+            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="apellido">Apellido</label>
             <input 
-                id="N_documento"
-                type="number" 
-                className="p-3 border rounded-xl bg-gray-50"
-                value={N_documento}
-                onChange={e => setN_documento(e.target.value)}
+                id="apellido"
+                type="text" 
+                placeholder="apellido de usuario"
+                className="w-100 mt-3 p-3 border rounded-xl bg-gray-50"
+                value={apellido}
+                onChange={e => setApellido(e.target.value)}
             />
-          </div>
+            </div>
           <div className="my-5 p-2">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
             <input 
@@ -122,7 +122,7 @@ const FormularioUsuario = () => {
       </div>
 
        <div className="">
-        <div className="p-2 ">
+          <div className="mr-7 p-2 mt-4">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="apellido">Apellido</label>
             <input 
                 id="apellido"
@@ -133,7 +133,7 @@ const FormularioUsuario = () => {
                 onChange={e => setApellido(e.target.value)}
             />
             </div>
-          <div className="mr-7 p-2 mt-4">
+          <div className="p-2 mt-3">
             <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="P_formacion">Programa de formacion</label>
             <input 
                 id="P_formacion"
@@ -299,21 +299,21 @@ const FormularioUsuario = () => {
                       </div>
                       <div className="p-2">
                       <div className="mr-7 p-2 mt-5">
-          <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
+          <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
             <input 
                 id="password"
                 type="password" 
-                placeholder="Password de registo"
+                placeholder="digita una Contraseña"
                 className="mt-3 p-3 border rounded-xl bg-gray-50"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
             <div className="mt-5">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password2">Repite el Password</label>
+            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password2">Repite la Contraseña</label>
             <input 
                 id="password2"
                 type="password" 
-                placeholder="Repite el Password"
+                placeholder="ssContraseña"
                 className="mt-3 p-3 border rounded-xl bg-gray-50"
                 value={repetirPassword}
                 onChange={e => setRepetirPassword(e.target.value)}
@@ -337,7 +337,7 @@ const FormularioUsuario = () => {
           }
         
     </form>
-</>
+    </>
   )
 }
 

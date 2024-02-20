@@ -77,7 +77,7 @@ const FormularioConvocatoria = () => {
             <label 
             className="text-gray-700 uppercase font-bold text-sm"
             htmlFor="nombre"
-            >Nombre convocatoria</label>
+            >Titulo convocatoria</label>
             <input 
                 id="nombre"
                 type="text" 
@@ -91,7 +91,7 @@ const FormularioConvocatoria = () => {
             <label 
             className="text-gray-700 uppercase font-bold text-sm"
             htmlFor="descripcion"
-            >Descripcion</label>
+            >Requisitos para el postulado</label>
             <textarea 
                 id="descripcion"
                 className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"

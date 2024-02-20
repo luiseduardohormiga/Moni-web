@@ -13,6 +13,19 @@ const Login = () => {
     const { setAuth } = useAuth()
     const navigate = useNavigate()
 
+    const [isValidEmail, setIsValidEmail] = useState(true);
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        setIsValidEmail(validateEmail(value));
+    };
+
+    const validateEmail = (email) => {
+        // Validación simple de correo electrónico
+        return /\S+@\S+\.\S+/.test(email);
+    };
+
     const handleSubmit = async e => {
         e.preventDefault()
 
@@ -49,22 +62,23 @@ const Login = () => {
         >
             
             <div className="my-5">
-                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
-                <input 
-                    id="email"
-                    type="email"
-                    placeholder="Email de registo"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-                    value={email}
-                    onChange={ e => setEmail(e.target.value)}
-                />
-            </div>
+            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo Electrónico</label>
+            <input 
+                id="email"
+                type="email"
+                placeholder="Escribe tu correo electrónico"
+                className={`w-full mt-3 p-3 border rounded-xl bg-gray-50 ${isValidEmail ? '' : 'border-red-500'}`}
+                value={email}
+                onChange={handleChange}
+            />
+            {!isValidEmail && <p className="text-red-500 mt-1 text-sm">Por favor ingresa un correo electrónico válido.</p>}
+        </div>
             <div className="my-5">
-                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
+                <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">Contraseña</label>
                 <input 
                     id="password"
                     type="password" 
-                    placeholder="Password de registo"
+                    placeholder="Digite Contraseña"
                     className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
                     value={password}
                     onChange={ e => setPassword(e.target.value)}
