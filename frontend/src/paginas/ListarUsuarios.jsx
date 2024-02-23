@@ -4,17 +4,10 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 const ListarUsuarios = () => {
-  const [busqueda, setBusqueda] = useState('');
   const { usuarios } = useAuth()
     //console.log(usuarios)
 
-    const handleBusquedaChange = (event) => {
-      setBusqueda(event.target.value);
-    };
-  
-    const usuariosFiltrados = usuarios.filter(usuario =>
-      usuario.nombre.toLowerCase().includes(busqueda.toLowerCase())
-    );
+   
 
   return (
     <>
@@ -33,16 +26,14 @@ const ListarUsuarios = () => {
           <input
             type="text"
             placeholder="Buscar usuario..."
-            value={busqueda} 
-            onChange={handleBusquedaChange}
             className="border border-gray-300 p-3"
           /> 
       </div>
     </div>
       
     <div className="bg-white shadow mt-10 rounded-lg ">
-        {usuariosFiltrados.length ?
-          usuariosFiltrados.map(usuario =>(
+        {usuarios.length ?
+          usuarios.map(usuario =>(
             <PreviewUsuarios 
               key={usuario._id}
               usuario={usuario}
