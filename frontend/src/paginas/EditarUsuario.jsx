@@ -54,11 +54,13 @@ const EditarUsuario = () => {
           <button
             className="uppercase font-bold"
             onClick={handleClick}
-          > Eliminar</button>
+          > Eliminar
+          </button>
         </div>
       </div>
 
-      <FormularioUsuario />
+      <FormularioUsuario/>
+      
     </>
   )
 }

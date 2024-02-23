@@ -28,22 +28,14 @@ const Usuario = () => {
                 </div>
               </div>
       <div >
-        <label className="text-xl">Nombre:</label>
-          <h2 className="border ">{nombre}</h2>
-        <label className="text-xl">Apellido</label>
+      <h2 className="border">Nombre: {nombre}</h2>
           <h2 className="border">Apellido: {apellido}</h2>
-        <label className="text-xl">TIPO DE DOCUMENTO:</label>
-          <h2 className="border">{tipo_documento}</h2>
-        <label className="text-xl">NUMERO DE DOCUMENTO:</label>
-          <h2 className="border">{N_documento}</h2>
-        <label className="text-xl">PROGRAMA DE FORMACION:</label>
-          <h2 className="border">{P_formacion}</h2>
-        <label className="text-xl">FICHA:</label>
-          <h2 className="border">{ficha}</h2>
-        <label className="text-xl">CORREO:</label>
-          <h2 className="border">{email}</h2>
-        <label className="text-xl">ROL DE USUARIO:</label>
-          <h2 className="border">{rol}</h2>
+          <h2 className="border">TIPO DE DOCUMENTO: {tipo_documento}</h2>
+          <h2 className="border">NUMERO DE DOCUMENTO: {N_documento}</h2>
+          <h2 className="border">PROGRAMA DE FORMACION: {P_formacion}</h2>
+          <h2 className="border"> FICHA:{ficha}</h2>
+          <h2 className="border">CORREO: {email}</h2>
+          <h2 className="border">ROL DE USUARIO: {rol}</h2>
        
       </div>
       </>
