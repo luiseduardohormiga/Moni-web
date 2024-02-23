@@ -87,7 +87,7 @@ const AuthProvider = ({children}) => {
                 }
             }
             const { data } = await clienteAxios.put(`/usuarios/${usuario.id}`, usuario, config)
-                console.log(data)
+                //console.log(data)
 
                 // sincronizar el state
                 const usuarioActualizado = usuarios.map(usuarioState => usuarioState._id ===  data._id ? data : usuarioState)
