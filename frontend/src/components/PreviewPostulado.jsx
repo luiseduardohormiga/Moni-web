@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 const PreviewPostulado = ({postulado}) => {
-    const { Postulado, archivoPDF, _id } = postulado
+    const { Postulado, _id } = postulado
   return (
     <div className="border-b p-5 flex">
         <p className="flex-1">

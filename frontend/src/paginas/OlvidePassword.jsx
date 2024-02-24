@@ -20,7 +20,7 @@ const OlvidePassword = () => {
             return
         }
         try {
-            const { data } =  await clienteAxios.post(`/usuarios/olvide-password`, { email })            
+            const { data } = await clienteAxios.post(`/usuarios/olvide-password`, { email })
             setAlerta({
                 msg: data.msg,
                 error: false
@@ -29,7 +29,7 @@ const OlvidePassword = () => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/')
-            },2000)
+            }, 2000)
         } catch (error) {
             setAlerta({
                 msg: error.response.data.msg,
@@ -40,46 +40,48 @@ const OlvidePassword = () => {
 
     const { msg } = alerta
 
-  return (
-    <>
-    <div>
-    <h1 className="text-green-600 font-black text-6xl capitalize text-center">Recupera tu cuenta</h1>
+    return (
+        <>
+            <div>
+                <h1 className="text-green-600 font-black text-6xl capitalize text-center">Recupera tu cuenta</h1>
 
-    { msg && <Alerta alerta={alerta}/>}
+                {msg && <Alerta alerta={alerta} />}
 
-    <form  
-    className="my-10 bg-white shadow rounded-lg p-10"
-    onSubmit={handleSubmit}
-    >
-    
-        <div className="my-5">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
-            <input 
-                id="email"
-                type="email" 
-                placeholder="Email de registo"
-                className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-            />
-        </div>
-        <input 
-            type="submit"
-            value="contituar"
-            className="bg-green-600 mb-5 w-full py-3 text-white uppercase font-bold rounded
-            hover:cursor-pointer hover:bg-green-800 transition-color"
-        />
-    </form>
-    <nav className="lg:justify-between">
-        <Link
-            className='block text-center my-5 text-slate-500 uppercase text-sm '
-            to='/'>
-            Inicio 
-        </Link>
-    </nav>
-    </div>
-</>
-  )
+                <form
+                    className="my-10 bg-white shadow rounded-lg p-10"
+                    onSubmit={handleSubmit}
+                >
+
+                    <div className="my-5">
+                        <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="email">Correo Electronico</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="correo electronico"
+                            className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <input
+                        type="submit"
+                        value="contituar"
+                        className="mb-5 w-full py-3 text-white uppercase font-bold rounded"
+                        style={{ background: '#39A900', transition: 'background-color 0.3s' }}
+                        onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                        onMouseLeave={(e) => e.target.style.background = '#39A900'}
+                    />
+                </form>
+                <nav className="lg:justify-between">
+                    <Link
+                        className='block text-center my-5 text-slate-500 uppercase text-sm '
+                        to='/'>
+                        Inicio
+                    </Link>
+                </nav>
+            </div>
+        </>
+    )
 }
 
 export default OlvidePassword

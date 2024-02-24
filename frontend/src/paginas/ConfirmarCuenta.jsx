@@ -36,9 +36,7 @@ const ConfirmarCuenta = () => {
   return (
     <>
     <div>
-      <h1 className="text-green-600 font-black text-6xl capitalize">Confirma tu cuenta y comienza a crear tus {' '}
-        <span className="text-slate-700">proyectos</span>
-      </h1>
+      <h1 className="font-black text-6xl capitalize"style={{ color: '#39A900'}}>Confirma tu cuenta</h1>
       <div className='m5-20 md:mt-10 shadow-lg px-5 py-10 rounded-xl bg-white'>
       {msg && <Alerta alerta={alerta}/>}
 

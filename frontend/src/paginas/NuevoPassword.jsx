@@ -34,7 +34,7 @@ const NuevoPassword = () => {
 
         if (password.length < 6) {
             setAlerta({
-                msg: 'El passwor debe tener minimo 6 caracteres',
+                msg: 'la contraseña debe tener minimo 6 caracteres',
                 error: true
             })
             return
@@ -42,7 +42,7 @@ const NuevoPassword = () => {
         try {
             const url = `/usuarios/olvide-password/${token}`
 
-            const { data } = await clienteAxios.post(url, { password})
+            const { data } = await clienteAxios.post(url, { password })
             setAlerta({
                 msg: data.msg,
                 error: false
@@ -52,7 +52,7 @@ const NuevoPassword = () => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/login')
-            },2000)
+            }, 2000)
         } catch (error) {
             setAlerta({
                 msg: error.response.data.msg,
@@ -61,47 +61,49 @@ const NuevoPassword = () => {
         }
     }
     const { msg } = alerta
-  return (
-    <>
-    <div>
-    <h1 className="text-green-600 font-black text-6xl capitalize">Restablese tu contraseña</h1>
-   
-    {msg && <Alerta alerta={alerta}/>}
-        { tokenValido && (
-            <form 
-            className="my-10 bg-white shadow rounded-lg p-10"
-            onSubmit={handleSubmit}
-            >
-        
-        <div className="my-5">
-            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">nueva Password</label>
-            <input 
-                id="password"
-                type="password" 
-                placeholder="Escribe tu nueva Password de registo"
-                className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-            />
-        </div>
-        <input 
-            type="submit"
-            value="Guardar nueva password"
-            className="bg-green-600 mb-5 w-full py-3 text-white uppercase font-bold rounded
-            hover:cursor-pointer hover:bg-green-800 transition-color"
-        />
-    </form>
-        )}
-        {passwordModificado && (
-            <Link
-                className='block text-center my-5 text-slate-500 uppercase text-sm'
-                to='/'>
-                Inicia Sesion
-            </Link>
-        )}
-        </div>
-</>
-  )
+    return (
+        <>
+            <div>
+                <h1 className="font-black text-6xl capitalize" style={{ color: '#39A900' }}>Restablese tu contraseña</h1>
+
+                {msg && <Alerta alerta={alerta} />}
+                {tokenValido && (
+                    <form
+                        className="my-10 bg-white shadow rounded-lg p-10"
+                        onSubmit={handleSubmit}
+                    >
+
+                        <div className="my-5">
+                            <label className="uppercase text-gray-600 block text-xl font-bold" htmlFor="password">nueva Contraseña</label>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Escribe tu nueva contraseña"
+                                className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <input
+                            type="submit"
+                            value="Guardar nueva contraseña"
+                            className="mb-5 w-full py-3 text-white uppercase font-bold rounded"
+                            style={{ background: '#39A900', transition: 'background-color 0.3s' }}
+                            onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                            onMouseLeave={(e) => e.target.style.background = '#39A900'}
+                        />
+                    </form>
+                )}
+                {passwordModificado && (
+                    <Link
+                        className='block text-center my-5 text-slate-500 uppercase text-sm'
+                        to='/'>
+                        Inicia Sesion
+                    </Link>
+                )}
+            </div>
+        </>
+    )
 }
 
 export default NuevoPassword

@@ -20,44 +20,50 @@ const Convocatorias = () => {
 
   return (
     <>
-    <div className="md:flex gap-6">
-      <h1 className="text-4xl p-3 font-black md:mt-10 ">Convocatorias</h1>
-      {auth.rol === 'admin'?
-      <div className="mt-10 bg-green-600 rounded-lg flex p-3">
-        <Link
-          to='crear-convocatoria'
-          className=" p-3 text-white uppercase font-bold"
-          >Nueva Convocatoria
-        </Link>
-        
-        <img className="w-10 h-10 md:mt-7" src="/public/mas2.png"/>
-      </div>
-      :
-      ''
-      }
-      <div className="md:flex mt-10">
-      <p className="font-bold mr-5 uppercase mt-5">Buscar Convocatoria</p>
+      <div className="md:flex gap-6">
+        <h1 className="text-4xl p-3 font-black md:mt-10 ">Convocatorias</h1>
+        {auth.rol === 'admin' ?
+          <div className="mt-1 rounded-lg flex p-3"
+            style={{ background: '#39A900', transition: 'background-color 0.3s' }}
+            onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+            onMouseLeave={(e) => e.target.style.background = '#39A900'}>
+            <Link
+              to='crear-convocatoria'
+              className="p-3 text-white uppercase font-bold "
+              style={{ background: '#39A900', transition: 'background-color 0.3s' }}
+              onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+              onMouseLeave={(e) => e.target.style.background = '#39A900'}
+            >Nueva Convocatoria
+            </Link>
+
+            <img className="w-10 h-10 md:mt-7" src="/public/mas2.png" />
+          </div>
+          :
+          ''
+        }
+        <div className="md:flex mt-10">
+          <p className="font-bold mr-5 uppercase mt-5">Buscar Convocatoria</p>
           <input
             type="text"
             placeholder="Buscar convocatorias..."
-            value={busqueda} 
+            value={busqueda}
             onChange={handleBusquedaChange}
             className="border border-gray-300 p-3 lg:mt-5"
-          /> 
+          />
+        </div>
       </div>
-    </div>
 
-      
-      
-    <div className="bg-white shadow mt-10 rounded-lg">
+
+
+      <div className="bg-white shadow mt-10 rounded-lg">
         {convocatoriasFiltradas.length ?
-          convocatoriasFiltradas.map(convocatoria =>(
+          convocatoriasFiltradas.map(convocatoria => (
             <PreviewConvocatoria
               key={convocatoria._id}
               convocatoria={convocatoria}
-              />
-            )) 
-        : <p className="text-center text-gray-600 uppercase p-5">No hay Convocatorias </p>}
+            />
+          ))
+          : <p className="text-center text-gray-600 uppercase p-5">No hay Convocatorias </p>}
       </div>
     </>
   )

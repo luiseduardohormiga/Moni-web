@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const PreviewConvocatoriaInicio = ({convocatoria}) => {
+const PreviewConvocatoriaInicio = ({ convocatoria }) => {
 
-    const { titulo, _id, descripcion, img } = convocatoria
+    const { titulo, descripcion, img } = convocatoria
 
-  return (
+    return (
         <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
             <div className="ml-10">
                 {convocatoria.img && <img src={img.url} alt="imagen" style={{ width: '85%', height: 'auto' }} />}
@@ -16,14 +16,17 @@ const PreviewConvocatoriaInicio = ({convocatoria}) => {
                 </p>
                 <h2 className="text-center">
                     <Link
-                        to={'/login'} 
-                        className="text-green-700 hover:text-gray-600 uppercase font-bold "
-                        >Inicia Sesion para poder Postularce
+                        to={'/login'}
+                        className="uppercase font-bold"
+                        style={{ color: '#39A900', transition: 'color 0.3s' }}
+                        onMouseEnter={(e) => e.target.style.color = '#2F7B00'}
+                        onMouseLeave={(e) => e.target.style.color = '#39A900'}
+                    >Inicia Sesion para poder Postularce
                     </Link>
                 </h2>
             </div>
         </div>
-  )
+    )
 }
 
 export default PreviewConvocatoriaInicio

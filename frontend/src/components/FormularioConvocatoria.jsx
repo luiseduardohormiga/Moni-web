@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import useConvocatorias from "../hooks/useConvocatorias"
 import Alerta from "./Alerta"
+import Swal from 'sweetalert2';
 
 const FormularioConvocatoria = () => {
     const [id, setId] = useState(null)
@@ -41,16 +42,18 @@ const FormularioConvocatoria = () => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-
+        
         if (titulo.trim() === '') {
-            alert('La convocatoria necesita un Titulo');
+            Swal.fire({
+                title: "La convocatoria necesita un titulo!",
+                confirmButtonColor: "#39A900"});
             return;
         }
         if ([titulo, descripcion, img, fechaInicio, fechaFinalizacion].includes('')) {
-            mostrarAlerta({
-                msg: 'Todos los campos son obligatorios',
-                error: true
-            })
+            Swal.fire({
+                title: "Todos los campos son obligatorios",
+                confirmButtonColor: "#39A900"
+              });
             return
         }
 
@@ -130,7 +133,10 @@ const FormularioConvocatoria = () => {
                         const selectDate = new Date(e.target.value);
                         const currenDate = new Date()
                         if (selectDate < currenDate) {
-                            alert('La fecha de inicio no puede ser menor que la fecha actual')
+                            Swal.fire({
+                                title: "La fecha de inicio no puede ser menor que la fecha actual",
+                                confirmButtonColor: "#39A900"
+                              });
                             setFechaInicio(currenDate.toISOString().slice(0, 10));
                             return;
                         }
@@ -151,7 +157,10 @@ const FormularioConvocatoria = () => {
                     onChange={e => {
                         const fechaFinalizacion = e.target.value;
                         if (fechaFinalizacion <= fechaInicio) {
-                            alert('La fecha de finalizacion no puede ser menor o igual a la decha de inicio')
+                            Swal.fire({
+                                title: "La fecha de finalizacion no puede ser menor o igual a la decha de inicio",
+                                confirmButtonColor: "#39A900"
+                              });
                             setFechaFinalizacion('')
                             return;
                         }
@@ -161,7 +170,9 @@ const FormularioConvocatoria = () => {
             </div>
 
             <input type="submit" value={id ? 'Actualizar convocatoria' : 'Crear convocatoria'}
-                className="bg-green-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-green-700 transition-colors"
+                className="w-full p-3 uppercase font-bold text-white rounded cursor-pointers" style={{background: '#39A900', transition: 'background-color 0.3s'}}
+                onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                onMouseLeave={(e) => e.target.style.background = '#39A900'}
             />
 
         </form>

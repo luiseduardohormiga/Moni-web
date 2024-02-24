@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const ConvocatoriasContext = createContext()
 
@@ -110,10 +111,13 @@ const ConvocatoriasProvider = ({children}) =>{
         })
         setConvocatorias([...convocatorias, data])
         
-        setAlerta({
-            msg: 'Convocatoria creada correctamente',
-            error: false
-        })
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Convocatoria creada correctamente",
+            showConfirmButton: false,
+            timer: 1500
+          });
         setTimeout(() => {
             setAlerta({})
             navigate('/convocatorias')
@@ -155,10 +159,6 @@ const ConvocatoriasProvider = ({children}) =>{
         //sincronizar 
         const convocatoriaActualizada = convocatorias.filter(convocatoriaState => convocatoriaState._id !== id)
         setConvocatorias(convocatoriaActualizada)
-        setAlerta({
-            msg: data.msg,
-            error: false
-        })
         setTimeout(() => {
             setAlerta({})
             navigate('/convocatorias')
@@ -186,10 +186,13 @@ const ConvocatoriasProvider = ({children}) =>{
         };
         const { data } = await clienteAxios.post('/postulaciones', form, config);
         setPostulaciones([...postulaciones, data]);
-        mostrarAlerta({
-            msg: 'postulacion subida correctamente',
-            error: false,
-        });
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Convocatoria creada correctamente",
+            showConfirmButton: false,
+            timer: 1500
+          });
     } catch (error) {
         if (error.response && error.response.data && error.response.data.msg) {
             throw new Error(error.response.data.msg); // Devolver el mensaje de error del servidor

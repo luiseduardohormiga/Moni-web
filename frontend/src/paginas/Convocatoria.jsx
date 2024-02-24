@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import useConvocatorias from "../hooks/useConvocatorias"
-import ModalFormularioPostulacion from "../components/ModalFormularioPostulacion"
 import useAuth from "../hooks/useAuth"
-import Postulado from "../components/Postulado"
 import PreviewPostulado from "../components/PreviewPostulado"
 import FormularioPostulacion from "../components/FormularioPostulacion"
 

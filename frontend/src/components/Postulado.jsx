@@ -1,7 +1,7 @@
 
 
 const Postulado = ({postulado}) => {
-    const { archivoPDF, _id } = postulado
+    const { archivoPDF } = postulado
   return (
     <div className="border-b p-5 flex justify-between items-center">
       <div>

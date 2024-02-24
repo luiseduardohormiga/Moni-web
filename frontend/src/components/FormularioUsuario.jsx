@@ -192,8 +192,11 @@ const FormularioUsuario = () => {
               <input
                 type="submit"
                 value={id ? 'Actualizar Usuario' : 'Nuevo Usuario'}
-                className="bg-green-600 mb-5 w-full py-3 text-white uppercase font-bold rounded
-                hover:cursor-pointer hover:bg-green-800 transition-color"
+                className="mb-5 w-full py-3 text-white uppercase font-bold rounded
+                hover:cursor-pointer"
+                style={{background: '#39A900', transition: 'background-color 0.3s'}}
+                onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                onMouseLeave={(e) => e.target.style.background = '#39A900'}
               />
             </div>
           </div>

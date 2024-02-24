@@ -61,7 +61,10 @@ const FormularioPostulacion = () => {
             />
             </div>
             <input type="submit"
-            className="bg-green-600 hover:bg-green-700 w-full p-3 text-white uppercase text-sm font-bold cursor-pointer transition-colors rounded"
+            className="w-full p-3 text-white uppercase text-sm font-bold cursor-pointer transition-colors rounded"
+            style={{background: '#39A900', transition: 'background-color 0.3s'}}
+                onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                onMouseLeave={(e) => e.target.style.background = '#39A900'}
             value={'Postularse'}
             />
         </form>

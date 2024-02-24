@@ -58,9 +58,9 @@ const EditarUsuario = () => {
           </button>
         </div>
       </div>
-      
-      <FormularioUsuario/>
-      
+
+      <FormularioUsuario />
+
     </>
   )
 }

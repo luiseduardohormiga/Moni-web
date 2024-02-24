@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom"
-
 const Footer = () => {
   return (
     <footer>
@@ -8,10 +6,10 @@ const Footer = () => {
                 <div className="grid grid-flow-cols-1 md:grid-cols-2 lg:grid-flow-cols-4 gap-2">
                     <div className="mb-5">
                         <img src="/public/logo_sena.png" alt="logo sena" />
-                        <h1 className="uppercase text-green-700">servicio nacional de aprendizaje</h1>
+                        <h1 className="uppercase" style={{color: '#39A900'}}>servicio nacional de aprendizaje</h1>
                     </div>
                     <div className="mb-5 mt-16">
-                        <h2 className="text-center uppercase text-green-600">Acerca de nosotros</h2> 
+                        <h2 className="text-center uppercase" style={{color: '#39A900'}}>Acerca de nosotros</h2> 
                         <nav className="lg:flex lg:justify-between">
                             <div>
                                 <h2 className='block text-center my-5 text-slate-500 uppercase text-sm'>diseñadores</h2>
