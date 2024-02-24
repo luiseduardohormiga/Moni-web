@@ -5,9 +5,17 @@ import { useState } from "react"
 
 const ListarUsuarios = () => {
   const { usuarios } = useAuth()
-    //console.log(usuarios)
+  const [buscarUsuario, setBuscarUsuario] = useState("");
 
-   
+  // Función para manejar cambios en el campo de búsqueda
+  const handleBuscarUsuario = (e) => {
+    setBuscarUsuario(e.target.value);
+  };
+
+  // Filtrar los usuarios 
+  const filtrarUsuarios = usuarios.filter((usuario) =>
+    usuario.nombre.toLowerCase().includes(buscarUsuario.toLowerCase())
+  );
 
   return (
     <>
@@ -22,24 +30,26 @@ const ListarUsuarios = () => {
         </Link>
       </div>
       <div className="flex">
-      <p className="font-bold mr-5 uppercase mt-5">Buscar Usuario</p>
+          <p className="font-bold mr-5 uppercase mt-5">Buscar Usuario</p>
           <input
             type="text"
             placeholder="Buscar usuario..."
             className="border border-gray-300 p-3"
-          /> 
-      </div>
+            value={buscarUsuario}
+            onChange={handleBuscarUsuario}
+          />
+        </div>
     </div>
       
     <div className="bg-white shadow mt-10 rounded-lg ">
-        {usuarios.length ?
-          usuarios.map(usuario =>(
+        {filtrarUsuarios.length ?
+          filtrarUsuarios.map(usuario =>(
             <PreviewUsuarios 
               key={usuario._id}
               usuario={usuario}
             />
           ))
-        : <p> No Ususarios </p>}
+        : <p> No hay usuarios </p>}
       </div>
     </>
   )

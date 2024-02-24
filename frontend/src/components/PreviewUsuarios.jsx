@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 const PreviewUsuarios = ({usuario}) => {
-    const { nombre, _id, apellido } = usuario
+    const { nombre, _id } = usuario
     
   return (
     <>

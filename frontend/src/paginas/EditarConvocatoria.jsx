@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import FormularioConvocatoria from "../components/FormularioConvocatoria"
 import useConvocatorias from "../hooks/useConvocatorias"
+import Swal from 'sweetalert2';
 
 const EditarConvocatoria = () => {
     const params = useParams()
@@ -10,12 +11,34 @@ const EditarConvocatoria = () => {
 
     useEffect(() => {
         obtenerConvocatoria(params.id)
-    },[])
-    const handleClick = ()=>{
-        if (confirm('deseas eliminar esta convocatoria?')) {
+      }, [])
+
+    const handleClick = () => {
+        // if (confirm('deseas eliminar este usuario?')) {
+        //     eliminarUsuario(params.id)
+        // }
+        Swal.fire({
+          icon: 'question',
+          title: 'Estas seguro de eliminar la convocatoria?',
+          showCancelButton: true,
+          confirmButtonColor: "red",
+          cancelButtonColor: "#39A900",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Eliminado",
+              text: "Se elimino la convocatoria correctamente!",
+              icon: "success",
+              timer: 1800,
+              timerProgressBar: true,
+              showConfirmButton: false,
+            });
             eliminarConvocatoria(params.id)
-        } 
-    }
+          }
+        });
+      }
 
     const { titulo } = convocatoria
 
