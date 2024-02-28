@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import useConvocatorias from "../hooks/useConvocatorias"
 import useAuth from "../hooks/useAuth"
@@ -16,6 +16,7 @@ const Convocatoria = () => {
     }, [])
     const { titulo, descripcion, fechaInicio, fechaFinalizacion } = convocatoria
     //console.log(convocatoria)
+    
     if (cargando) return 'cargando...'
   return (
     <>

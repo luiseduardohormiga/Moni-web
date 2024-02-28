@@ -60,6 +60,7 @@ const FormularioPostulacion = () => {
                 onChange={handleFileChange}
             />
             </div>
+            
             <input type="submit"
             className="w-full p-3 text-white uppercase text-sm font-bold cursor-pointer transition-colors rounded"
             style={{background: '#39A900', transition: 'background-color 0.3s'}}

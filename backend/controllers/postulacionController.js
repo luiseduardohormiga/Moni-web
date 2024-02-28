@@ -46,17 +46,6 @@ const postularce = async (req, res) => {
         }
 }
 
-
-const obtenerPostularcion = async (req, res) => {
-    const { id } = req.params
-    const postulacion = await Postulacion.findById(id).populate("convocatoria")
-    if(postulacion.convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("Accion no valida")
-        return res.status(404).json({msg: error.message})
-    }
-    res.json(postulacion)
-}
-
 const actualizarPostularce = async (req, res) => {
     const { id } = req.params
     const postulacion = await Postulacion.findById(id).populate("convocatoria")
@@ -65,11 +54,10 @@ const actualizarPostularce = async (req, res) => {
         const error = new Error("postulacion no existe")
         return res.status(404).json({msg: error.message})
     }
-    if (postulacion.convocatoria.creador.toString() !== req.usuario._id.toString()) {
-        const error = new Error("No tienes los permisos para postularte")
-        return res.status(403).json({msg: error.message})
-    }
-    postulacion.archivoPDF = req.body.archivoPDF || postulacion.archivoPDF
+    //postulacion.archivoPDF = req.body.archivoPDF || postulacion.archivoPDF
+    postulacion.calificacionAdmin = req.body.calificacionAdmin || postulacion.calificacionAdmin
+    postulacion.calificacionInstructor = req.body.calificacionInstructor || postulacion.calificacionInstructor
+    postulacion.calificacionPsicologo = req.body.calificacionPsicologo || postulacion.calificacionPsicologo
     try {
         const postulacionAlmacenada = await postulacion.save()
         res.json(postulacionAlmacenada)
@@ -77,7 +65,16 @@ const actualizarPostularce = async (req, res) => {
         console.log(error)
     }
 }
+const obtenerPostulados = async (req, res)=>{
+    const postulados = await Postulacion.find();
+    res.json(postulados)
+}
 
+const obtenerPostularcion = async (req, res) => {
+    const { id } = req.params
+    const postulacion = await Postulacion.findById(id)
+    res.json(postulacion)
+}
 const eliminarPostularcion = async (req, res) => {
     const { id } = req.params
     const postulacion = await Postulacion.findById(id).populate("convocatoria")
@@ -101,6 +98,7 @@ const eliminarPostularcion = async (req, res) => {
 
 export {
     postularce,
+    obtenerPostulados,
     obtenerPostularcion,
     actualizarPostularce,
     eliminarPostularcion,
