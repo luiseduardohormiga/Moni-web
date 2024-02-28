@@ -157,6 +157,7 @@ const ConvocatoriasProvider = ({ children }) => {
                 }
             }
             const { data } = await clienteAxios.delete(`/convocatorias/${id}`, config)
+            setConvocatoria(data)
             //sincronizar 
             const convocatoriaActualizada = convocatorias.filter(convocatoriaState => convocatoriaState._id !== id)
             setConvocatorias(convocatoriaActualizada)
@@ -190,7 +191,7 @@ const ConvocatoriasProvider = ({ children }) => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Convocatoria creada correctamente",
+                title: "Te has postulado correctamente",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -225,7 +226,7 @@ const ConvocatoriasProvider = ({ children }) => {
             const datosPostulacion = { ...data, nombreUsuario };
 
             setPostulado(datosPostulacion)
-            console.log(datosPostulacion)
+            //console.log(datosPostulacion)
         } catch (error) {
             console.log(error)
         } finally {
@@ -248,11 +249,16 @@ const ConvocatoriasProvider = ({ children }) => {
             const calificionCompletada = postulaciones.map(postulacionState => postulacionState._id ===  data._id ? data : postulacionState)
                 setPostulado( calificionCompletada)
                 //alerta
-                setAlerta({
-                    msg: 'Postulacion Actualizada',
-                    error: false
-                })
-               
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "calificacion guardada",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(() => {
+                    navigate(`/convocatorias/${convocatoria}`)
+                }, 2000)
             setPostulado(data)
         } catch (error) {
             console.log(error)

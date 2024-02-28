@@ -48,12 +48,14 @@ const postularce = async (req, res) => {
 
 const actualizarPostularce = async (req, res) => {
     const { id } = req.params
+
     const postulacion = await Postulacion.findById(id).populate("convocatoria")
     
     if (!postulacion) {
         const error = new Error("postulacion no existe")
         return res.status(404).json({msg: error.message})
     }
+    //almacenar id del calificador
     //postulacion.archivoPDF = req.body.archivoPDF || postulacion.archivoPDF
     postulacion.calificacionAdmin = req.body.calificacionAdmin || postulacion.calificacionAdmin
     postulacion.calificacionInstructor = req.body.calificacionInstructor || postulacion.calificacionInstructor
@@ -65,7 +67,7 @@ const actualizarPostularce = async (req, res) => {
         console.log(error)
     }
 }
-const obtenerPostulados = async (req, res)=>{
+const obtenerPostulados = async (res)=>{
     const postulados = await Postulacion.find();
     res.json(postulados)
 }

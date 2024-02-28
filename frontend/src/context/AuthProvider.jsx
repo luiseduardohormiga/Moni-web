@@ -15,6 +15,7 @@ const AuthProvider = ({children}) => {
     
     useEffect(() => {
         const obtenerUsuarios = async () => {
+            setCargando(true)
             try {
                 const token = localStorage.getItem('token');
                 const config = token ? {
@@ -27,6 +28,8 @@ const AuthProvider = ({children}) => {
                 setUsuarios(data)
             } catch (error) {
                 console.log(error)
+            } finally {
+                setCargando(false)
             }
         }
         obtenerUsuarios()
@@ -77,6 +80,7 @@ const AuthProvider = ({children}) => {
         }
     }
     const editarUsuario = async usuario => {
+        setCargando(true)
         const token = localStorage.getItem('token')
             try {
                 if(!token) return
@@ -105,7 +109,9 @@ const AuthProvider = ({children}) => {
                 },1000)
            } catch (error) {
             console.log(error)
-           }
+           } finally {
+            setCargando(false)
+        }
     }
     const nuevoUsuario = async usuario => {
         try {

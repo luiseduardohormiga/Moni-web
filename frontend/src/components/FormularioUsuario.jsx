@@ -20,7 +20,7 @@ const FormularioUsuario = () => {
   const [error, setError] = useState('');
 
   const params = useParams()
-  const { alerta, submitUsuario, usuario } = useAuth()
+  const { alerta, submitUsuario, usuario, cargando } = useAuth()
 
   useEffect(() => {
     if (params.id) {
@@ -35,7 +35,7 @@ const FormularioUsuario = () => {
       setRol(usuario.rol);
       setPassword(usuario.password);
     }
-  }, [params]);
+  }, [params, usuario._id]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -64,6 +64,7 @@ const FormularioUsuario = () => {
     setPassword('');
 
   }
+  if (cargando) return 'cargando...'
   const { msg } = alerta
   return (
     
