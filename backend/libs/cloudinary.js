@@ -20,7 +20,8 @@ export const deleteImg = async id => {
 export const uploadFile = async filePath => {
     return await cloudinary.uploader.upload(filePath, {
         folder: 'archivos',
-        resource_type: 'raw'
+        resource_type: 'auto',
+        type: 'upload'
     })
 }
 export const deleteFile = async id => {

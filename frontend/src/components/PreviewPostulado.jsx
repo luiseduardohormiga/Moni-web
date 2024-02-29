@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth";
-import { useState } from "react";
 
 const PreviewPostulado = ({postulado}) => {
   const { usuarios } = useAuth()

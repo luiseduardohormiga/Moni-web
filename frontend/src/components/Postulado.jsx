@@ -1,5 +1,4 @@
 
-
 const Postulado = ({postulado}) => {
     const { archivoPDF } = postulado
   return (

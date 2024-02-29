@@ -20,6 +20,7 @@ conectarDB();
 //cors
 const whitelist = [process.env.FRONTEND_URL]
 
+//origin: "*"  para todos
 const corsOptions ={
     origin: function(origin, callback){
         if (whitelist.includes(origin)) {

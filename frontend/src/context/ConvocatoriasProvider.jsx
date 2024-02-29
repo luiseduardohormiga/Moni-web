@@ -189,7 +189,7 @@ const ConvocatoriasProvider = ({ children }) => {
             const { data } = await clienteAxios.post('/postulaciones', form, config);
             setPostulaciones([...postulaciones, data]);
             Swal.fire({
-                position: "top-end",
+                position: "top-center",
                 icon: "success",
                 title: "Te has postulado correctamente",
                 showConfirmButton: false,

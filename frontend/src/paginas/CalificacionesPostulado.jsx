@@ -13,6 +13,8 @@ const CalificacionesPostulado = () => {
 
     const { obtenerPostulacion, postulado, calificarPostulado, cargando } = useConvocatorias()
 
+    const { pdf } = postulado
+
     const { auth } = useAuth()
     const params = useParams()
 
@@ -50,6 +52,7 @@ const CalificacionesPostulado = () => {
         setCalificacionPsicologo('');
     }
     console.log(postulado)
+    //console.log("URL del PDF:", postulado.pdf.url);
     if (cargando) return 'cargando...'
     return (
         <>
@@ -58,6 +61,17 @@ const CalificacionesPostulado = () => {
                 <div>
                     {auth.rol === 'admin' ?
                         <>
+                            {postulado.pdf && postulado.pdf.url && (
+                                <div>
+                                    <h2>PDF Preview</h2>
+                                    <iframe
+                                        title="PDF Preview"
+                                        width="100%"
+                                        height="500px"
+                                        src={postulado.pdf.url}
+                                    ></iframe>
+                                </div>
+                            )}
                             <div className="mt-10">
                                 <label className="uppercase">calificacion admin</label>
                                 <input
@@ -105,33 +119,33 @@ const CalificacionesPostulado = () => {
                             </div>
                         </>
                         : auth.rol === 'instructor' ?
-                        <>
-                            <div className="mt-5">
-                                <label className="uppercase">calificacion instructor</label>
-                                <input
-                                    type="text"
-                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
-                                    value={calificacionInstructor}
-                                    onChange={e => {
-                                        const value = e.target.value;
-                                        // Solo permitir números (incluyendo teclas especiales de navegación)
-                                        if (/^\d*$/.test(value) || value === '') {
-                                            setCalificacionInstructor(value);
-                                        }
-                                    }}
-                                />
-                            </div>
-                            <div className="mt-5">
-                                <label className="uppercase">Recomendacion Aval:</label>
-                                <input
-                                    type="text"
-                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
-                                    value={recomendacion}
-                                    onChange={e => setRecomendacion(e.target.value)}
-                                    style={{ height: '100px' }}
-                                />
-                            </div>
-                        </>
+                            <>
+                                <div className="mt-5">
+                                    <label className="uppercase">calificacion instructor</label>
+                                    <input
+                                        type="text"
+                                        className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
+                                        value={calificacionInstructor}
+                                        onChange={e => {
+                                            const value = e.target.value;
+                                            // Solo permitir números (incluyendo teclas especiales de navegación)
+                                            if (/^\d*$/.test(value) || value === '') {
+                                                setCalificacionInstructor(value);
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="mt-5">
+                                    <label className="uppercase">Recomendacion Aval:</label>
+                                    <input
+                                        type="text"
+                                        className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
+                                        value={recomendacion}
+                                        onChange={e => setRecomendacion(e.target.value)}
+                                        style={{ height: '100px' }}
+                                    />
+                                </div>
+                            </>
                             : auth.rol === 'psicologo' ?
                                 <div className="mt-5">
                                     <label className="uppercase">calificacion psicologo</label>
