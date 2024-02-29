@@ -9,6 +9,7 @@ const CalificacionesPostulado = () => {
     const [calificacionAdmin, setCalificacionAdmin] = useState('');
     const [calificacionPsicologo, setCalificacionPsicologo] = useState('');
     const [calificacionInstructor, setCalificacionInstructor] = useState('');
+    const [recomendacion, setRecomendacion] = useState('');
 
     const { obtenerPostulacion, postulado, calificarPostulado, cargando } = useConvocatorias()
 
@@ -25,13 +26,14 @@ const CalificacionesPostulado = () => {
             setCalificacionAdmin(postulado.calificacionAdmin);
             setCalificacionInstructor(postulado.calificacionInstructor);
             setCalificacionPsicologo(postulado.calificacionPsicologo);
+            setRecomendacion(postulado.recomendacion)
         }
     }, [params, postulado]);
 
     const handleSubmit = async e => {
         e.preventDefault();
         // Validación de campos vacíos
-        if ([calificacionAdmin, calificacionInstructor, calificacionPsicologo].includes('')) {
+        if ([calificacionAdmin, calificacionInstructor, calificacionPsicologo, recomendacion].includes('')) {
             Swal.fire({
                 title: "la calificacion es obligatoria!",
                 confirmButtonColor: "#39A900"
@@ -40,12 +42,14 @@ const CalificacionesPostulado = () => {
         }
 
         //pasar al provider
-        await calificarPostulado({ id, calificacionAdmin, calificacionInstructor, calificacionPsicologo });
+        await calificarPostulado({ id, calificacionAdmin, calificacionInstructor, calificacionPsicologo, recomendacion });
         setId('');
         setCalificacionAdmin('');
         setCalificacionInstructor('');
+        setRecomendacion('');
         setCalificacionPsicologo('');
     }
+    console.log(postulado)
     if (cargando) return 'cargando...'
     return (
         <>
@@ -58,7 +62,7 @@ const CalificacionesPostulado = () => {
                                 <label className="uppercase">calificacion admin</label>
                                 <input
                                     type="text"
-                                    className="mt-3 p-3 border rounded-xl bg-gray-50"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
                                     value={calificacionAdmin}
                                     onChange={e => {
                                         const value = e.target.value;
@@ -73,17 +77,27 @@ const CalificacionesPostulado = () => {
                                 <label className="uppercase">calificacion instructor</label>
                                 <input
                                     type="text"
-                                    className="mt-3 p-3 border rounded-xl bg-gray-50"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
                                     value={calificacionInstructor}
                                     readOnly={true}
                                     style={{ backgroundColor: '#c2c0c0', color: '#fff' }}
                                 />
                             </div>
                             <div className="mt-5">
+                                <label className="uppercase">Recomendacion Aval:</label>
+                                <input
+                                    type="text"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
+                                    value={recomendacion}
+                                    readOnly={true}
+                                    style={{ backgroundColor: '#c2c0c0', color: '#fff', height: '100px' }}
+                                />
+                            </div>
+                            <div className="mt-5">
                                 <label className="uppercase">calificacion psicologo</label>
                                 <input
                                     type="text"
-                                    className="mt-3 p-3 border rounded-xl bg-gray-50"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
                                     value={calificacionPsicologo}
                                     readOnly={true}
                                     style={{ backgroundColor: '#c2c0c0', color: '#fff' }}
@@ -91,11 +105,12 @@ const CalificacionesPostulado = () => {
                             </div>
                         </>
                         : auth.rol === 'instructor' ?
+                        <>
                             <div className="mt-5">
                                 <label className="uppercase">calificacion instructor</label>
                                 <input
                                     type="text"
-                                    className="border ml-5"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
                                     value={calificacionInstructor}
                                     onChange={e => {
                                         const value = e.target.value;
@@ -106,12 +121,23 @@ const CalificacionesPostulado = () => {
                                     }}
                                 />
                             </div>
+                            <div className="mt-5">
+                                <label className="uppercase">Recomendacion Aval:</label>
+                                <input
+                                    type="text"
+                                    className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
+                                    value={recomendacion}
+                                    onChange={e => setRecomendacion(e.target.value)}
+                                    style={{ height: '100px' }}
+                                />
+                            </div>
+                        </>
                             : auth.rol === 'psicologo' ?
                                 <div className="mt-5">
                                     <label className="uppercase">calificacion psicologo</label>
                                     <input
                                         type="text"
-                                        className="border ml-5"
+                                        className="mt-3 p-3 border rounded-xl bg-gray-50 w-full"
                                         value={calificacionPsicologo}
                                         onChange={e => {
                                             const value = e.target.value;

@@ -257,7 +257,7 @@ const ConvocatoriasProvider = ({ children }) => {
                     timer: 1500
                 });
                 setTimeout(() => {
-                    navigate(`/convocatorias/${convocatoria}`)
+                    navigate(`/convocatorias`)
                 }, 2000)
             setPostulado(data)
         } catch (error) {

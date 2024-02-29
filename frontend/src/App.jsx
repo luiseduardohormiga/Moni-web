@@ -49,7 +49,6 @@ function App() {
                 <Route path=':id' element={<Usuario />} />
                 <Route path='editar/:id' element={<EditarUsuario />} />
               </Route>
-
               <Route path='/postulaciones' element={<RutaProtegida />}>
                 <Route index element={<CalificacionesPostulado />} />
                 <Route path=':id' element={<CalificacionesPostulado />} />

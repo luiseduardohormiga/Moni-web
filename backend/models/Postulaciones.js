@@ -8,36 +8,30 @@ const postulacionesSchema = mongoose.Schema({
     pdf:{
         url: String,
         public_id: String,
-        //trim: true,
-        //require: true,
     },
     convocatoria:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Convocatoria",
     },
-    idAdmin:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Usuario"
-    },
     calificacionAdmin:{
         type: String,
         trim: true
-    },
-    idInstructor:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Usuario"
     },
     calificacionInstructor:{
         type: String,
         trim: true
     },
-    idPsicologo:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Usuario"
+    recomendacion:{
+        type: String,
+        trim: true
     },
     calificacionPsicologo:{
         type: String,
         trim: true
+    },
+    promedioCalificaciones:{
+        type: String,
+        trim: true,
     },
 },{
     timestamps: true
