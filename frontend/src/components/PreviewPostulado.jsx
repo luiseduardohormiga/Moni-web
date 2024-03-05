@@ -5,6 +5,11 @@ const PreviewPostulado = ({ postulado }) => {
   const { usuarios } = useAuth();
   const { Postulado, _id, promedioCalificaciones } = postulado;
 
+  //primera letras del nombre en mayuscula
+  function capitalizeName(name) {
+    return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
   const { auth } = useAuth()
 
   // Buscar el usuario en la lista por ID
@@ -16,7 +21,7 @@ const PreviewPostulado = ({ postulado }) => {
   return (
     <div className="border-b p-5 flex">
       <h1 className="flex-1 font-bold">
-        {nombreDelPostulado} {apellidoDelPostulado}
+        {capitalizeName(nombreDelPostulado)} {capitalizeName(apellidoDelPostulado)}
       </h1>
       {auth.rol === 'admin' ?
         <p className="flex-1">

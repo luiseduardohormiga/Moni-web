@@ -7,13 +7,18 @@ const Usuario = () => {
 
   const { obtenerUsuario, usuario, cargando } = useAuth()
 
+  //primera letras del nombre en mayuscula
+  function capitalizeName(name) {
+    return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
   useEffect(() => {
     obtenerUsuario(params.id)
   }, [])
   const { nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol } = usuario
   if (cargando) return 'Cargando...'
   return (
-    <>
+    <div className="mx-auto lg:w-2/3">
       <div className='items-centertext-black flex justify-between '>
         <h1 className="text-xl font-bold">DATOS DEL USUARIO</h1>
         <div>
@@ -28,17 +33,17 @@ const Usuario = () => {
         </div>
       </div>
       <div >
-        <h2 className="border">Nombre: {nombre}</h2>
-        <h2 className="border">Apellido: {apellido}</h2>
-        <h2 className="border">TIPO DE DOCUMENTO: {tipo_documento}</h2>
-        <h2 className="border">NUMERO DE DOCUMENTO: {N_documento}</h2>
-        <h2 className="border">PROGRAMA DE FORMACION: {P_formacion}</h2>
-        <h2 className="border"> FICHA:{ficha}</h2>
-        <h2 className="border">CORREO: {email}</h2>
-        <h2 className="border">ROL DE USUARIO: {rol}</h2>
+        <h2 className="border">Nombre: {capitalizeName(nombre)}</h2>
+        <h2 className="border">Apellido: {capitalizeName(apellido)}</h2>
+        <h2 className="border">TIPO DE DOCUMENTO: {capitalizeName(tipo_documento)}</h2>
+        <h2 className="border">NUMERO DE DOCUMENTO: {capitalizeName(N_documento)}</h2>
+        <h2 className="border">PROGRAMA DE FORMACION: {capitalizeName(P_formacion)}</h2>
+        <h2 className="border"> FICHA:{capitalizeName(ficha)}</h2>
+        <h2 className="border">CORREO: {capitalizeName(email)}</h2>
+        <h2 className="border">ROL DE USUARIO: {capitalizeName(rol)}</h2>
 
       </div>
-    </>
+    </div>
 
 
   )

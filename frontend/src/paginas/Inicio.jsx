@@ -20,9 +20,9 @@ const Inicio = () => {
   return (
     <>
       <HeaderPrincipal />
-      <p className="font-black text-6xl capitalize text-center mt-8"
+      <p className="font-black text-6xl  text-center mt-8"
       style={{ color: '#39A900'}}
-      >Postulate a las nuevas convocatorias </p>
+      >Postulate a las nuevas convocatorias</p>
       <div className="mx-auto p-5 md:flex md:justify-center mt-10">
         <p className="font-bold mr-5 uppercase mt-3">Buscar</p>
         <input

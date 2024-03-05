@@ -46,7 +46,7 @@ const ListarUsuarios = () => {
         </div>
       </div>
 
-      <div className="bg-white shadow mt-10 rounded-lg ">
+      <div className="bg-white shadow mt-10 rounded-lg lg:w-2/3 mx-auto">
         {filtrarUsuarios.length ?
           filtrarUsuarios.map(usuario => (
             <PreviewUsuarios

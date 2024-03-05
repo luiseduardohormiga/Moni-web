@@ -23,20 +23,16 @@ const Convocatorias = () => {
       <div className="md:flex gap-6">
         <h1 className="text-4xl p-3 font-black md:mt-10 ">Convocatorias</h1>
         {auth.rol === 'admin' ?
-          <div className="mt-1 rounded-lg flex p-3"
-            style={{ background: '#39A900', transition: 'background-color 0.3s' }}
-            onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
-            onMouseLeave={(e) => e.target.style.background = '#39A900'}>
+          <div className=" rounded-lg flex p-3">
             <Link
               to='crear-convocatoria'
-              className="p-3 text-white uppercase font-bold "
+              className="w-full p-3 flex text-white uppercase font-bold mt-5 text-cente rounded-lg"
               style={{ background: '#39A900', transition: 'background-color 0.3s' }}
               onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
               onMouseLeave={(e) => e.target.style.background = '#39A900'}
             >Nueva Convocatoria
+            <img className="h-10 ml-5" src="/public/mas2.png" />
             </Link>
-
-            <img className="w-10 h-10 md:mt-7" src="/public/mas2.png" />
           </div>
           :
           ''
@@ -48,14 +44,12 @@ const Convocatorias = () => {
             placeholder="Buscar convocatorias..."
             value={busqueda}
             onChange={handleBusquedaChange}
-            className="border border-gray-300 p-3 lg:mt-5"
+            className="border border-gray-300 p-3 lg:mt-5 rounded-lg"
           />
         </div>
       </div>
 
-
-
-      <div className="bg-white shadow mt-10 rounded-lg">
+      <div className="bg-white shadow mt-10 rounded-lg p-10 lg:w-2/3 mx-auto">
         {convocatoriasFiltradas.length ?
           convocatoriasFiltradas.map(convocatoria => (
             <PreviewConvocatoria
