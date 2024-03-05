@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom"
 
 const PreviewUsuarios = ({usuario}) => {
-    const { nombre, _id } = usuario
+    const { _id, nombre, apellido, rol } = usuario
     
   return (
     <>
       <div className="border-b p-5 flex">
           <p className="flex-1">
-              {nombre}
-
+              {nombre} {apellido}
               <span className="text-sm text-gray-500 uppercase">{' '}</span>
+              <h2 className="text-green-500">{rol}</h2>
           </p>
           <div>
             <Link

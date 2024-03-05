@@ -61,7 +61,7 @@ const autenticar = async (req, res) =>{
     } 
     //comprobar la si esta confirmado   
     if (!usuario.confirmado) {
-        const error = new Error("cuenta no confirmada")
+        const error = new Error("cuenta no confirmada, reviza tu email y confirmala")
         return res.status(403).json({msg: error.message})
     } 
     //comprobar password
@@ -182,7 +182,6 @@ const editarUsuario = async (req, res)=>{
         //guarda los cambios 
         const usuarioAlmacenado = await usuario.save()
         res.json(usuarioAlmacenado)
-        res.json({msg: 'datos del usuario actualizado correctamente'})
     } catch (error) {
         console.log(error)
     }

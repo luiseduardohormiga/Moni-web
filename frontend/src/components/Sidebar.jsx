@@ -38,27 +38,8 @@ const Sidebar = () => {
             </Link>
           )}
         </aside>
-        : auth.rol === 'Aprendiz' ?
-          <aside className="md:w-80 lg:w-96 px-5 py-10">
-            <div>
-              <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
-              <p className="text-xl font-bold">Rol: {auth.rol}</p>
-            </div>
-          </aside>
-          : auth.rol === 'instuctor' ?
-            <aside className="md:w-80 lg:w-96 px-5 py-10">
-              <div>
-                <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
-                <p className="text-xl font-bold">Rol: {auth.rol}</p>
-              </div>
-            </aside>
-            :
-            <aside className="md:w-80 lg:w-96 px-5 py-10">
-              <div>
-                <p className="text-xl font-bold">Usuario: {auth.nombre}</p>
-                <p className="text-xl font-bold">Rol: {auth.rol}</p>
-              </div>
-            </aside>
+        : 
+        ''
       }
 
     </>

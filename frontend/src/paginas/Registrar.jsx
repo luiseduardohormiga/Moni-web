@@ -18,9 +18,20 @@ const Registrar = () => {
   const [password, setPassword] = useState('')
   const [repetirPassword, setRepetirPassword] = useState('')
   const [alerta, setAlerta] = useState({})
-
   const navigate = useNavigate()
-  //const params = useParams()
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  //comprobar si es un correo electronico
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setIsValidEmail(validateEmail(value));
+  };
+
+  const validateEmail = (email) => {
+    // Validación simple de correo electrónico
+    return /\S+@\S+\.\S+/.test(email);
+  };
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -119,10 +130,11 @@ const Registrar = () => {
                 id="email"
                 type="email"
                 placeholder="correo electronico"
-                className="mt-3 p-3 border rounded-xl bg-gray-50"
+                className={`w-full mt-3 p-3 border rounded-xl bg-gray-50 ${isValidEmail ? '' : 'border-red-500'}`}
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={handleChange}
               />
+              {!isValidEmail && <p className="text-red-500 mt-1 text-sm">Por favor ingresa un correo electrónico válido.</p>}
             </div>
           </div>
 

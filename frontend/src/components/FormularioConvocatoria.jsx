@@ -24,7 +24,7 @@ const FormularioConvocatoria = () => {
         setImagenPreview(nuevaImagenPreview);
     };
 
-    const { mostrarAlerta, alerta, submitConvocatoria, convocatoria } = useConvocatorias()
+    const { alerta, submitConvocatoria, convocatoria } = useConvocatorias()
     useEffect(() => {
         if (params.id) {
             setId(convocatoria._id)

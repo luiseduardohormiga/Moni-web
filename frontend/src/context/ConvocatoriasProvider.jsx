@@ -19,21 +19,12 @@ const ConvocatoriasProvider = ({ children }) => {
     useEffect(() => {
         const obtenerConvocatorias = async () => {
             try {
-                const token = localStorage.getItem('token');
-                const config = token ? {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    }
-                } : {};
-
-                const { data } = await clienteAxios.get('/convocatorias', config);
+                const { data } = await clienteAxios.get('/convocatorias');
                 setConvocatorias(data);
             } catch (error) {
                 console.log(error);
             }
         }
-
         obtenerConvocatorias();
     }, []);
 
@@ -76,10 +67,13 @@ const ConvocatoriasProvider = ({ children }) => {
             const convocatoriaActualizada = convocatorias.map(convocatoriaState => convocatoriaState._id === data._id ? data : convocatoriaState)
             setConvocatoria(convocatoriaActualizada)
             //alerta
-            setAlerta({
-                msg: 'Convocatoria actualizada correctamente',
-                error: false
-            })
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Convocatoria actualizada correctamente",
+                showConfirmButton: false,
+                timer: 1500
+            });
             //redireccionar
             setTimeout(() => {
                 setAlerta({})
@@ -128,7 +122,6 @@ const ConvocatoriasProvider = ({ children }) => {
         }
     }
     const obtenerConvocatoria = async id => {
-        setCargando(true)
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -142,9 +135,7 @@ const ConvocatoriasProvider = ({ children }) => {
             setConvocatoria(data)
         } catch (error) {
             console.log(error)
-        } finally {
-            setCargando(false)
-        }
+        } 
     }
     const eliminarConvocatoria = async id => {
         try {
@@ -200,13 +191,12 @@ const ConvocatoriasProvider = ({ children }) => {
                 throw new Error(error.response.data.msg); // Devolver el mensaje de error del servidor
 
             } else {
-                throw new Error("Error al crear el usuario");
+                throw new Error("Error al Postularse");
             }
 
         }
     };
     const obtenerPostulacion = async id => {
-        setCargando(true)
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -229,8 +219,6 @@ const ConvocatoriasProvider = ({ children }) => {
             //console.log(datosPostulacion)
         } catch (error) {
             console.log(error)
-        } finally {
-            setCargando(false)
         }
     }
     const calificarPostulado = async postulado => {

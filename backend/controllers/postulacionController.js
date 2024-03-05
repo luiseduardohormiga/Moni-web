@@ -28,12 +28,10 @@ const postularce = async (req, res) => {
             public_id: result.public_id
         }
     }
-
     const postulacion = new Postulacion({
         ...req.body,
         pdf,
     })
-
     postulacion.Postulado = req.usuario._id
     try {
         const postulacionAlmacenada = await postulacion.save()

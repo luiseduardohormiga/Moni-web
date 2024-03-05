@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
-import { Link, useParams, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
+import Swal from "sweetalert2"
 
 const OlvidePassword = () => {
 
@@ -13,18 +14,18 @@ const OlvidePassword = () => {
         e.preventDefault()
 
         if (email === '' || email.length < 6) {
-            setAlerta({
-                msg: 'El email es obligatorio',
-                error: true
-            })
+            Swal.fire({
+                title: "el correo es obligatorio!",
+                confirmButtonColor: "#a90000"
+            });
             return
         }
         try {
             const { data } = await clienteAxios.post(`/usuarios/olvide-password`, { email })
-            setAlerta({
-                msg: data.msg,
-                error: false
-            })
+            Swal.fire({
+                title: data.msg,
+                confirmButtonColor: "#39A900"
+            });
             //redireccionar
             setTimeout(() => {
                 setAlerta({})

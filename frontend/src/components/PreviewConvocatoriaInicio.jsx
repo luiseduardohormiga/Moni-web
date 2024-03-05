@@ -21,7 +21,7 @@ const PreviewConvocatoriaInicio = ({ convocatoria }) => {
                         style={{ color: '#39A900', transition: 'color 0.3s' }}
                         onMouseEnter={(e) => e.target.style.color = '#2F7B00'}
                         onMouseLeave={(e) => e.target.style.color = '#39A900'}
-                    >Inicia Sesion para poder Postularce
+                    >Inicia Sesion para poder Postularse
                     </Link>
                 </h2>
             </div>

@@ -22,13 +22,15 @@ const whitelist = [process.env.FRONTEND_URL]
 
 //origin: "*"  para todos
 const corsOptions ={
-    origin: function(origin, callback){
-        if (whitelist.includes(origin)) {
-            //permitido
-            callback(null, true)
+    origin: function (requestOrigin, callback) {
+        if (process.env.NODE_ENV === 'development') {
+            callback(null, true); // Permitir todas las solicitudes durante el desarrollo local
         } else {
-            //no permitido
-            callback(new Error("Error de cors"))
+            if (whitelist.includes(requestOrigin)) {
+                callback(null, true); // Permitir solicitudes desde los orígenes de la lista blanca
+            } else {
+                callback(new Error('No permitido por CORS')); // Bloquear todas las demás solicitudes
+            }
         }
     }
 }

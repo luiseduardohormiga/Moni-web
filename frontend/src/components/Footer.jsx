@@ -14,10 +14,7 @@ const Footer = () => {
                             <div>
                                 <h2 className='block text-center my-5 text-slate-500 uppercase text-sm'>diseñadores</h2>
                                 <p className="text-slate-500">
-                                    Luis Gabriel Cuero Quilindo
-                                </p>
-                                <p className="text-slate-500">
-                                    Luis Eduardo Hurtado HOrmiga
+                                    Luis Eduardo Hurtado Hormiga
                                 </p>
                             </div>
                             <div>

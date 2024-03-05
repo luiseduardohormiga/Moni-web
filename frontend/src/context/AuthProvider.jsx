@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import clienteAxios from "../config/clienteAxios";
+import Swal from 'sweetalert2'
 
 const AuthContext = createContext()
 
@@ -126,15 +127,15 @@ const AuthProvider = ({children}) => {
             const { data } = await clienteAxios.post('/usuarios', usuario, config)
     
             setUsuarios([...usuarios, data])
-            
-            setAlerta({
-                msg: 'usuarios creado correctamente',
-                error: false
-            })
             setTimeout(() => {
-                setAlerta({})
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "usuario creado correctamente",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 navigate('/usuarios')
-                window.location.reload();
             },500)
         } catch (error) {
             if (error.response && error.response.data && error.response.data.msg) {

@@ -9,12 +9,11 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
-
     const { setAuth } = useAuth()
     const navigate = useNavigate()
-
     const [isValidEmail, setIsValidEmail] = useState(true);
 
+    //comprobar si es un correo electronico
     const handleChange = (e) => {
         const value = e.target.value;
         setEmail(value);
@@ -42,12 +41,11 @@ const Login = () => {
             setAlerta({})
             localStorage.setItem('token', data.token)
             setAuth(data)
-
             navigate('/convocatorias')
         } catch (error) {
-            setAlerta({
-                msg: error.response.data.msg,
-                error: true
+            Swal.fire({
+                title: error.response.data.msg,
+                confirmButtonColor: "#d33",
             })
         }
     }
@@ -55,7 +53,7 @@ const Login = () => {
     return (
         <div className="lg:w-2/5">
             <h1 className="font-black text-6xl capitalize text-center"
-                style={{ color: '#39A900' }} x
+                style={{ color: '#39A900' }}
             >Inicia sesion</h1>
             {msg && <Alerta alerta={alerta} />}
             <form

@@ -1,8 +1,8 @@
 import HeaderPrincipal from "../components/HeaderPrincipal"
 import useConvocatorias from "../hooks/useConvocatorias"
-import PreviewConvocatoriaInicio from "../components/PreviewConvocatoriaInicio"
 import Footer from "../components/Footer"
 import { useState } from "react"
+import PreviewConvocatoriaInicio from "../components/PreviewConvocatoriaInicio"
 
 const Inicio = () => {
   const [busqueda, setBusqueda] = useState('');
