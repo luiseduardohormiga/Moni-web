@@ -23,17 +23,17 @@ const Inicio = () => {
       <p className="font-black text-6xl  text-center mt-8"
       style={{ color: '#39A900'}}
       >Postulate a las nuevas convocatorias</p>
-      <div className="mx-auto p-5 md:flex md:justify-center mt-10">
+      <div className="p-5 flex justify-center mt-10 mx-auto">
         <p className="font-bold mr-5 uppercase mt-3">Buscar</p>
         <input
           type="text"
           placeholder="Buscar convocatorias..."
           value={busqueda}
           onChange={handleBusquedaChange}
-          className="border border-gray-300 p-3"
+          className="border border-gray-300 p-3 "
         />
       </div>
-      <div className="bg-white container mx-auto p-5 md:flex md:justify-center mt-10">
+      <div className="bg-white container p-5 md:flex md:justify-center mt-10 mx-auto">
         <div className="grid grid-cols-1 mx-auto p-5 md:justify-center md:grid-cols-2">
           {convocatoriasFiltradas.length ?
             convocatoriasFiltradas.map(convocatoria => (

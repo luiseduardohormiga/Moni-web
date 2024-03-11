@@ -36,9 +36,6 @@ const corsOptions ={
 }
 app.use(cors(corsOptions))
 
-//imagen
-//app.use(express.static("public"))
-
 //routing 
 app.use('/api/usuarios', usuarioRoutes)
 app.use('/api/convocatorias', convocatoriaRoutes)

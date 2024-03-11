@@ -23,14 +23,13 @@ const PreviewPostulado = ({ postulado }) => {
       <h1 className="flex-1 font-bold">
         {capitalizeName(nombreDelPostulado)} {capitalizeName(apellidoDelPostulado)}
       </h1>
-      {auth.rol === 'admin' ?
+      {auth.rol === 'admin' && !isNaN(promedioCalificaciones) && (
         <p className="flex-1">
           Promedio del postulado: {promedioCalificaciones}
         </p>
-        :
-        ''
-      }
-      <Link to={`/postulaciones/${_id}`} className="text-gray-500 hover:text-gray-800 uppercase text-sm font-bold">
+      )}
+      <Link to={`/postulaciones/${_id}`} className="text-gray-500 hover:text-gray-800 uppercase text-sm font-bold p-1 rounded-lg" style={{ color: '#39A900' }}>
+
         Calificar
       </Link>
     </div>

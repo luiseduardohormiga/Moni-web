@@ -1,9 +1,9 @@
 import express from "express"
 import {
-    postularce,
+    postularse,
     obtenerPostulados,
     obtenerPostularcion,
-    actualizarPostularce,
+    actualizarPostularse,
     eliminarPostularcion,
 } from "../controllers/postulacionController.js"
 import checkAuth from "../middleware/checkAuth.js"
@@ -11,13 +11,13 @@ import checkAuth from "../middleware/checkAuth.js"
 
 const router = express.Router()
 
-    router.post("/", checkAuth, postularce)
+    router.post("/", checkAuth, postularse)
     router.get("/", checkAuth, obtenerPostulados)
     
     router
         .route("/:id")
         .get(checkAuth, obtenerPostularcion)
-        .put(checkAuth, actualizarPostularce)
+        .put(checkAuth, actualizarPostularse)
         .delete(checkAuth, eliminarPostularcion)
 
 

@@ -17,6 +17,7 @@ import ListarUsuarios from './paginas/ListarUsuarios'
 import Usuario from './paginas/Usuario'
 import EditarUsuario from './paginas/EditarUsuario'
 import CalificacionesPostulado from './paginas/CalificacionesPostulado'
+import AcercaDe from './paginas/AcercaDe'
 
 import { AuthProvider } from './context/AuthProvider'
 import { ConvocatoriasProvider } from './context/ConvocatoriasProvider'
@@ -33,6 +34,7 @@ function App() {
             <Route path='/' element={<AuthLayout />}>
               <Route path='login' element={<Login />} />
               <Route path='registrar' element={<Registrar />} />
+              <Route path='/acerca-de' element={<AcercaDe />} />
               <Route path='olvide-password' element={<OlvidePassword />} />
               <Route path='olvide-password/:token' element={<NuevoPassword />} />
               <Route path='confirmar/:id' element={<ConfirmarCuenta />} />

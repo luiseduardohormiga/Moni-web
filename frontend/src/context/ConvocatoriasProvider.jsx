@@ -68,7 +68,7 @@ const ConvocatoriasProvider = ({ children }) => {
             setConvocatoria(convocatoriaActualizada)
             //alerta
             Swal.fire({
-                position: "top-end",
+                position: "top-center",
                 icon: "success",
                 title: "Convocatoria actualizada correctamente",
                 showConfirmButton: false,
@@ -105,7 +105,6 @@ const ConvocatoriasProvider = ({ children }) => {
                 }
             })
             setConvocatorias([...convocatorias, data])
-
             Swal.fire({
                 position: "top-end",
                 icon: "success",

@@ -5,53 +5,49 @@ import Swal from 'sweetalert2'
 
 const AuthContext = createContext()
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [usuarios, setUsuarios] = useState([])
     const [alerta, setAlerta] = useState({})
     const [auth, setAuth] = useState({})
     const [cargando, setCargando] = useState(true)
-    const [usuario, setUsuario] = useState({})  
+    const [usuario, setUsuario] = useState({})
 
     const navigate = useNavigate()
-    
-    useEffect(() => {
+
+
         const obtenerUsuarios = async () => {
-            setCargando(true)
             try {
                 const token = localStorage.getItem('token');
-                const config = token ? {
-                    headers:{
-                        "Content-Type": "aplication/json",
+                if (!token) return
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`
                     }
-                } : {};
-                const { data } = await clienteAxios('/usuarios', config)
-                setUsuarios(data)
+                }
+                const { data } = await clienteAxios.get('/usuarios', config);
+                setUsuarios(data);
             } catch (error) {
-                console.log(error)
-            } finally {
-                setCargando(false)
+                console.log('Error al obtener usuarios:', error); // Manejar errores
             }
         }
-        obtenerUsuarios()
-    }, []);
 
-    const  mostrarAlerta = alerta => {
+    const mostrarAlerta = alerta => {
         setAlerta(alerta)
-        setTimeout(() =>{
+        setTimeout(() => {
             setAlerta({})
         }, 3000)
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         const autenticarUsuario = async () => {
             const token = localStorage.getItem('token')
             if (!token) {
                 setCargando(false)
                 return
             }
-            const config ={
-                headers:{
+            const config = {
+                headers: {
                     "Content-Type": "aplication/json",
                     Authorization: `Bearer ${token}`
                 }
@@ -63,8 +59,8 @@ const AuthProvider = ({children}) => {
                 setAuth({})
             }
             setCargando(false)
-            
-        }   
+
+        }
         autenticarUsuario()
     }, []);
 
@@ -75,57 +71,57 @@ const AuthProvider = ({children}) => {
 
     const submitUsuario = async usuario => {
         if (usuario.id) {
-           await editarUsuario(usuario)
-        }else{
-           await nuevoUsuario(usuario)
+            await editarUsuario(usuario)
+        } else {
+            await nuevoUsuario(usuario)
         }
     }
     const editarUsuario = async usuario => {
         setCargando(true)
         const token = localStorage.getItem('token')
-            try {
-                if(!token) return
-            const config ={
-                headers:{
+        try {
+            if (!token) return
+            const config = {
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             }
             const { data } = await clienteAxios.put(`/usuarios/${usuario.id}`, usuario, config)
-                //console.log(data)
+            //console.log(data)
 
-                // sincronizar el state
-                const usuarioActualizado = usuarios.map(usuarioState => usuarioState._id ===  data._id ? data : usuarioState)
-                setUsuario(usuarioActualizado)
-                //alerta
-                setAlerta({
-                    msg: 'Usuario actualizado correctamente',
-                    error: false
-                })
-                //redireccionar
-                setTimeout(() => {
-                    setAlerta({})
-                    navigate('/usuarios')
-                    window.location.reload();
-                },1000)
-           } catch (error) {
+            // sincronizar el state
+            const usuarioActualizado = usuarios.map(usuarioState => usuarioState._id === data._id ? data : usuarioState)
+            setUsuario(usuarioActualizado)
+            //alerta
+            setAlerta({
+                msg: 'Usuario actualizado correctamente',
+                error: false
+            })
+            //redireccionar
+            setTimeout(() => {
+                setAlerta({})
+                navigate('/usuarios')
+                window.location.reload();
+            }, 1000)
+        } catch (error) {
             console.log(error)
-           } finally {
+        } finally {
             setCargando(false)
         }
     }
     const nuevoUsuario = async usuario => {
         try {
             const token = localStorage.getItem('token')
-            if(!token) return
-            const config ={
-                headers:{
+            if (!token) return
+            const config = {
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             }
             const { data } = await clienteAxios.post('/usuarios', usuario, config)
-    
+
             setUsuarios([...usuarios, data])
             setTimeout(() => {
                 Swal.fire({
@@ -136,7 +132,7 @@ const AuthProvider = ({children}) => {
                     timer: 1500
                 });
                 navigate('/usuarios')
-            },500)
+            }, 500)
         } catch (error) {
             if (error.response && error.response.data && error.response.data.msg) {
                 throw new Error(error.response.data.msg); // Devolver el mensaje de error del servidor
@@ -144,17 +140,17 @@ const AuthProvider = ({children}) => {
                 throw new Error("Error al crear el usuario");
             }
         }
-        return {nuevoUsuario, alerta}
-       }
-    
-    
+        return { nuevoUsuario, alerta }
+    }
+
+
 
     const obtenerUsuario = async id => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
-            const config ={
-                headers:{
+            const config = {
+                headers: {
                     "Content-Type": "aplication/json",
                     Authorization: `Bearer ${token}`
                 }
@@ -170,9 +166,9 @@ const AuthProvider = ({children}) => {
     const eliminarUsuario = async id => {
         try {
             const token = localStorage.getItem('token')
-            if(!token) return
-            const config ={
-                headers:{
+            if (!token) return
+            const config = {
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
@@ -188,16 +184,17 @@ const AuthProvider = ({children}) => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/usuarios')
-            },2000)
+            }, 2000)
         } catch (error) {
             console.log(error)
         }
-       }
+    }
 
-    return(
+    return (
         <AuthContext.Provider
             value={{
                 usuarios,
+                obtenerUsuarios,
                 auth,
                 setAuth,
                 cargando,

@@ -49,22 +49,22 @@ const CalificacionesPostulado = () => {
     }
     return (
         <>
-            <h1 className="font-black text-4xl capitalize text-center mt-8">Califica Al postulado {postulado.nombreUsuario} </h1>
-            <div className="md:flex ">
-                {auth.rol === 'admin' ?
-                    <div className="flex-1 mb-10">
-                        {postulado.pdf && postulado.pdf.url && (
-                            <iframe
-                                title="PDF Preview"
-                                width="100%"
-                                height="700px"
-                                src={postulado.pdf.url}
-                            ></iframe>
-                        )}
-                    </div>
-                    :
-                    ''
-                }
+        <div className="flex">
+            <p className="font-black text-4xl capitalize text-center mt-8 mb-5 mr-3">Califica Al postulado: </p>
+            <h1 className="font-black text-4xl capitalize text-center mt-8 mb-5" style={{ color: '#39A900' }}>{postulado.nombreUsuario}</h1>
+        </div>
+            
+            <div className="lg:flex">
+                <div className="mx-auto">
+                            {postulado.pdf && postulado.pdf.url && (
+                                <iframe
+                                    title="PDF Preview"
+                                    width="500"
+                                    height="700px"
+                                    src={postulado.pdf.url}
+                                ></iframe>
+                            )}
+                </div>
                 <form className="bg-white mx-auto p-10 flex-2 " onSubmit={handleSubmit}>
                     <div>
                         {auth.rol === 'admin' ?

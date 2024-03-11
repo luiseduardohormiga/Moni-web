@@ -8,7 +8,6 @@ const Convocatorias = () => {
   const [busqueda, setBusqueda] = useState('');
   const { auth } = useAuth()
   const { convocatorias } = useConvocatorias()
-  //console.log(convocatorias)
 
   const handleBusquedaChange = (event) => {
     setBusqueda(event.target.value);
@@ -20,36 +19,39 @@ const Convocatorias = () => {
 
   return (
     <>
-      <div className="md:flex gap-6">
-        <h1 className="text-4xl p-3 font-black md:mt-10 ">Convocatorias</h1>
-        {auth.rol === 'admin' ?
-          <div className=" rounded-lg flex p-3">
-            <Link
-              to='crear-convocatoria'
-              className="w-full p-3 flex text-white uppercase font-bold mt-5 text-cente rounded-lg"
-              style={{ background: '#39A900', transition: 'background-color 0.3s' }}
-              onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
-              onMouseLeave={(e) => e.target.style.background = '#39A900'}
-            >Nueva Convocatoria
-            <img className="h-10 ml-5" src="/public/mas2.png" />
-            </Link>
+      <div className="p-5 shadow md:flex md:items-center md:justify-between sm:flex-col">
+        <div className="md:flex md:items-center">
+          <div className="mr-10 mb-7">
+            <p className="font-bold uppercase">Buscar Convocatoria</p>
+            <input
+              type="text"
+              placeholder="Buscar convocatorias..."
+              value={busqueda}
+              onChange={handleBusquedaChange}
+              className="border border-gray-300 p-3 rounded-lg"
+            />
           </div>
-          :
-          ''
-        }
-        <div className="md:flex mt-10">
-          <p className="font-bold mr-5 uppercase mt-5">Buscar Convocatoria</p>
-          <input
-            type="text"
-            placeholder="Buscar convocatorias..."
-            value={busqueda}
-            onChange={handleBusquedaChange}
-            className="border border-gray-300 p-3 lg:mt-5 rounded-lg"
-          />
+          <div>
+            {auth.rol === 'admin' && (
+              <Link
+                to='crear-convocatoria'
+                className="w-full p-3 flex text-white uppercase font-bold text-center rounded-lg md:w-auto"
+                style={{ background: '#39A900', transition: 'background-color 0.3s' }}
+                onMouseEnter={(e) => e.target.style.background = '#2F7B00'}
+                onMouseLeave={(e) => e.target.style.background = '#39A900'}
+              >
+                Nueva Convocatoria
+                <img className="h-10 ml-5 hidden sm:block" src="/public/mas2.png" alt="Agregar icono" />
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="bg-white shadow mt-10 rounded-lg p-10 lg:w-2/3 mx-auto">
+
+      <h1 className="text-4xl mt-7 p-3 font-black text-center">Convocatorias</h1>
+
+      <div className="bg-white shadow mt-3 rounded-lg p-10 mx-auto">
         {convocatoriasFiltradas.length ?
           convocatoriasFiltradas.map(convocatoria => (
             <PreviewConvocatoria

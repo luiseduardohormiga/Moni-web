@@ -3,7 +3,7 @@ import Postulacion from "../models/Postulaciones.js"
 import { uploadFile, deleteFile } from "../libs/cloudinary.js"
 import fs from 'fs-extra'
 
-const postularce = async (req, res) => {
+const postularse = async (req, res) => {
     const { convocatoria } = req.body
     const { _id: userId } = req.usuario
 
@@ -18,6 +18,10 @@ const postularce = async (req, res) => {
     if (!existeConvocatoria) {
         const error = new Error("la convocatoria no existe")
         return res.status(404).json({ msg: error.message })
+    }
+    const fechaActual = new Date()
+    if (existeConvocatoria.fechaFinalizacion && existeConvocatoria.fechaFinalizacion < fechaActual) {
+        return res.status(400).json({ msg: "La convocatoria ha finalizado, no se puede postular" });
     }
     let pdf;
     if (req.files?.pdf) {
@@ -50,7 +54,7 @@ function calcularPromedio(calificacionAdmin, calificacionInstructor, calificacio
     const promedio = Math.floor(sumaTotal / 3);
     return promedio;
 }
-const actualizarPostularce = async (req, res) => {
+const actualizarPostularse = async (req, res) => {
     const { id } = req.params
     try {
         const postulacion = await Postulacion.findById(id).populate("convocatoria")
@@ -120,10 +124,10 @@ const eliminarPostularcion = async (req, res) => {
 }
 
 export {
-    postularce,
+    postularse,
     obtenerPostulados,
     obtenerPostularcion,
-    actualizarPostularce,
+    actualizarPostularse,
     eliminarPostularcion,
 }
 

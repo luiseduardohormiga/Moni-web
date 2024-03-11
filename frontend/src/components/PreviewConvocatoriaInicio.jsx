@@ -5,14 +5,14 @@ const PreviewConvocatoriaInicio = ({ convocatoria }) => {
     const { titulo, descripcion, img } = convocatoria
 
     return (
-        <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
-            <div className="ml-10">
-                {convocatoria.img && <img src={img.url} alt="imagen" style={{ width: '85%', height: 'auto' }} />}
-            </div>
-            <div className="ml-10 mt-10">
+        <div className="bg-gray-200 shadow rounded-lg md:p-10 justify-center mt-10+ mr-10">
+            
+                {convocatoria.img && <img className="mx-auto mt-10" src={img.url} alt="imagen" style={{ width: '85%', height: 'auto' }} />}
+            
+            <div className="ml-10 mt-10 p-2">
                 <h1 className="uppercase font-black text-2xl text-center">{titulo}</h1>
                 <p className="mt-7 mb-7">
-                    <span className="text-sm">{''}{descripcion}</span>
+                    {''}{descripcion}
                 </p>
                 <h2 className="text-center">
                     <Link
