@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 
 const ListarUsuarios = () => {
   const [buscarUsuario, setBuscarUsuario] = useState("");
-  const { usuarios, obtenerUsuarios } = useAuth()
+  const { usuarios, obtenerUsuarios, cargandoU } = useAuth()
 
   useEffect(() => {
     obtenerUsuarios();
@@ -19,6 +19,7 @@ const ListarUsuarios = () => {
   const filtrarUsuarios = usuarios.filter(usuario =>
     usuario.nombre.toLowerCase().includes(buscarUsuario.toLowerCase())
   );
+  if (cargandoU) return 'cargando...'
   return (
     <>
       <div className="p-5 shadow md:flex md:items-center md:justify-between sm:flex-col">

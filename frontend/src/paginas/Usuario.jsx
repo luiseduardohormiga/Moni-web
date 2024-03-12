@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth"
 const Usuario = () => {
   const params = useParams()
 
-  const { obtenerUsuario, usuario, cargando } = useAuth()
+  const { obtenerUsuario, usuario, cargandoU} = useAuth()
 
 
 
@@ -13,7 +13,8 @@ const Usuario = () => {
     obtenerUsuario(params.id)
   }, [])
   const { nombre, apellido, tipo_documento, N_documento, P_formacion, ficha, email, rol } = usuario
-  if (cargando) return 'Cargando...'
+ 
+  if (cargandoU) return 'cargando...'
   return (
     <div className="mx-auto lg:w-2/3">
       <div className='items-centertext-black flex justify-between '>

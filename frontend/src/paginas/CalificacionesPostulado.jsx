@@ -11,7 +11,7 @@ const CalificacionesPostulado = () => {
     const [calificacionInstructor, setCalificacionInstructor] = useState('');
     const [recomendacion, setRecomendacion] = useState('');
     const { obtenerPostulacion, postulado, calificarPostulado } = useConvocatorias()
-    const { auth } = useAuth()
+    const { auth, cargandoU } = useAuth()
     const params = useParams()
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const CalificacionesPostulado = () => {
 
     useEffect(() => {
         if (params.id && postulado) {
-            setId(postulado._id || '');// Si es undefined, establece una cadena vacía
+            setId(postulado._id);
             setCalificacionAdmin(postulado.calificacionAdmin);
             setCalificacionInstructor(postulado.calificacionInstructor);
             setCalificacionPsicologo(postulado.calificacionPsicologo);
@@ -47,6 +47,8 @@ const CalificacionesPostulado = () => {
         setRecomendacion('');
         setCalificacionPsicologo('');
     }
+    
+  if (cargandoU) return 'cargando...'
     return (
         <>
         <div className="flex">
@@ -56,14 +58,14 @@ const CalificacionesPostulado = () => {
             
             <div className="lg:flex">
                 <div className="mx-auto">
-                            {postulado.pdf && postulado.pdf.url && (
-                                <iframe
-                                    title="PDF Preview"
-                                    width="500"
-                                    height="700px"
-                                    src={postulado.pdf.url}
-                                ></iframe>
-                            )}
+                    {postulado.pdf && postulado.pdf.url && (
+                        <iframe
+                            title="PDF Preview"
+                            width="500"
+                            height="700px"
+                            src={postulado.pdf.url}
+                        ></iframe>
+                    )}
                 </div>
                 <form className="bg-white mx-auto p-10 flex-2 " onSubmit={handleSubmit}>
                     <div>

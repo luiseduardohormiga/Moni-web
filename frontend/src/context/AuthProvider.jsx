@@ -10,12 +10,14 @@ const AuthProvider = ({ children }) => {
     const [alerta, setAlerta] = useState({})
     const [auth, setAuth] = useState({})
     const [cargando, setCargando] = useState(true)
+    const [cargandoU, setCargandoU] = useState(false)
     const [usuario, setUsuario] = useState({})
 
     const navigate = useNavigate()
 
 
         const obtenerUsuarios = async () => {
+            setCargandoU(true)
             try {
                 const token = localStorage.getItem('token');
                 if (!token) return
@@ -27,6 +29,7 @@ const AuthProvider = ({ children }) => {
                 }
                 const { data } = await clienteAxios.get('/usuarios', config);
                 setUsuarios(data);
+                setCargandoU(false)
             } catch (error) {
                 console.log('Error al obtener usuarios:', error); // Manejar errores
             }
@@ -146,6 +149,7 @@ const AuthProvider = ({ children }) => {
 
 
     const obtenerUsuario = async id => {
+        setCargandoU(true)
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -157,6 +161,7 @@ const AuthProvider = ({ children }) => {
             }
             const { data } = await clienteAxios(`/usuarios/${id}`, config)
             setUsuario(data)
+            setCargandoU(false)
         } catch (error) {
             console.log(error)
         }
@@ -198,6 +203,7 @@ const AuthProvider = ({ children }) => {
                 auth,
                 setAuth,
                 cargando,
+                cargandoU,
                 mostrarAlerta,
                 alerta,
                 obtenerUsuario,

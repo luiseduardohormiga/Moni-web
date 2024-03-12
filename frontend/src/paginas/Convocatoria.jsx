@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import useConvocatorias from "../hooks/useConvocatorias"
 import useAuth from "../hooks/useAuth"
@@ -9,6 +9,8 @@ const Convocatoria = () => {
   const { obtenerConvocatoria, convocatoria, cargando } = useConvocatorias()
   const { auth, obtenerUsuarios } = useAuth()
   const params = useParams()
+  const [postuladosOrdenados, setPostuladosOrdenados] = useState([]);
+
   useEffect(() => {
     obtenerConvocatoria(params.id)
   }, [params.id])
@@ -18,6 +20,14 @@ const Convocatoria = () => {
   }, []);
 
   const { titulo, descripcion, fechaInicio, fechaFinalizacion, img } = convocatoria
+
+  useEffect(() => {
+    if (convocatoria && convocatoria.postulados) {
+      // Ordenar los postulados por el campo de promedio de forma descendente
+      const postuladosOrdenados = convocatoria.postulados.slice().sort((a, b) => b.promedioCalificaciones - a.promedioCalificaciones);
+      setPostuladosOrdenados(postuladosOrdenados);
+    }
+  }, [convocatoria]);
 
   // Convertir la fecha de inicio y finalización a objetos Date
   const fechaInicioDate = new Date(fechaInicio);
@@ -84,12 +94,12 @@ const Convocatoria = () => {
           </div>
           <div className="bg-white shadow mt-10 rounded-lg lg:w-2/3 mx-auto">
             {convocatoria.postulados?.length ?
-              convocatoria.postulados?.map(postulado => (
-                <PreviewPostulado
-                  key={postulado._id}
-                  postulado={postulado}
-                />
-              )) :
+              <div>
+              {postuladosOrdenados.map((postulado) => (
+                <PreviewPostulado key={postulado._id} postulado={postulado} />
+              ))}
+            </div>
+              :
               <p className="text-center my-5 p-10">No hay Postulados en este momento</p>}
           </div>
         </div>

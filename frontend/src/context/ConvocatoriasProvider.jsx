@@ -121,6 +121,7 @@ const ConvocatoriasProvider = ({ children }) => {
         }
     }
     const obtenerConvocatoria = async id => {
+        setCargando(true)
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -132,6 +133,7 @@ const ConvocatoriasProvider = ({ children }) => {
             }
             const { data } = await clienteAxios(`/convocatorias/${id}`, config)
             setConvocatoria(data)
+            setCargando(false)
         } catch (error) {
             console.log(error)
         } 
@@ -247,10 +249,9 @@ const ConvocatoriasProvider = ({ children }) => {
                     navigate(`/convocatorias`)
                 }, 2000)
             setPostulado(data)
+            setCargando(false)
         } catch (error) {
             console.log(error)
-        } finally {
-            setCargando(false)
         }
     }
     return (
