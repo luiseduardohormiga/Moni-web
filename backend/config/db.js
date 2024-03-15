@@ -1,3 +1,4 @@
+//i
 import mongoose from "mongoose"
 
 const conectarDB = async () => {
