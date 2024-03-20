@@ -7,22 +7,25 @@ const postularse = async (req, res) => {
     const { convocatoria } = req.body
     const { _id: userId } = req.usuario
 
+    //verificar que la convocatoria exista
+    const existeConvocatoria = await Convocatoria.findById(convocatoria)
+    if (!existeConvocatoria) {
+        const error = new Error("la convocatoria no existe")
+        return res.status(404).json({ msg: error.message })
+      }
+    //verifica si la convocatoria ya termino
+    const fechaActual = new Date()
+    if (existeConvocatoria.fechaFinalizacion && existeConvocatoria.fechaFinalizacion < fechaActual) {
+        return res.status(400).json({ msg: "La convocatoria ha finalizado, no se puede postular" });
+    }
+    
     //usuario solo puede postularse una sola vez
     const existePostulacion = await Postulacion.findOne({ convocatoria, Postulado: userId });
     if (existePostulacion) {
         // Si el usuario ya está postulado, devolver un error
         return res.status(400).json({ msg: "El usuario ya está postulado a esta convocatoria" });
     }
-    //verificar que la convocatoria exista
-    const existeConvocatoria = await Convocatoria.findById(convocatoria)
-    if (!existeConvocatoria) {
-        const error = new Error("la convocatoria no existe")
-        return res.status(404).json({ msg: error.message })
-    }
-    const fechaActual = new Date()
-    if (existeConvocatoria.fechaFinalizacion && existeConvocatoria.fechaFinalizacion < fechaActual) {
-        return res.status(400).json({ msg: "La convocatoria ha finalizado, no se puede postular" });
-    }
+    //manejo del PDF 
     let pdf;
     if (req.files?.pdf) {
         const result = await uploadFile(req.files.pdf.tempFilePath)
@@ -32,6 +35,7 @@ const postularse = async (req, res) => {
             public_id: result.public_id
         }
     }
+    //crear la postulacion
     const postulacion = new Postulacion({
         ...req.body,
         pdf,
